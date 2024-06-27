@@ -1,6 +1,6 @@
 ---
 layout: category
 title: Audio Programming
-category: facts
-permalink: /facts
+category: programming
+permalink: /programming
 ---
