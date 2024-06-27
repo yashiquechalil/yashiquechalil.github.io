@@ -1,6 +1,6 @@
 ---
 layout: category
-title: Interesting Facts
+title: Audio Programming
 category: facts
 permalink: /facts
 ---
