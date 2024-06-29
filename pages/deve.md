@@ -1,5 +1,5 @@
 ---
 layout: category
 title: Audio Development
-category: dev
-permalink: /dev
+category: deve
+permalink: /deve
