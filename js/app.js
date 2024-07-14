@@ -23,7 +23,7 @@ async function loadRNBO() {
 
     const { createDevice } =  RNBO;
 
-    await audioContext.resume();
+    // await audioContext.resume();
 
 
      
