@@ -10,7 +10,7 @@
         "maximum": 1,
         "exponent": 1,
         "steps": 2,
-        "initialValue": 0,
+        "initialValue": 1,
         "isEnum": true,
         "enumValues": [
           "stop",
