@@ -25,7 +25,7 @@ async function loadRNBO() {
 
     await audioContext.resume();
 
-    const rawPatcher = await fetch('patch.export.json');
+    const rawPatcher = await fetch('export/patch.export.json');
 
     const patcher = await rawPatcher.json();
 
