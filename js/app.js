@@ -25,9 +25,7 @@ async function loadRNBO() {
 
     await audioContext.resume();
 
-    device = audioContext.createGain();
-    
-    device.connect(audioContext.destination);
+
      
      // Fetch the exported patcher
      let response, patcher;
@@ -41,6 +39,10 @@ async function loadRNBO() {
              // beforehand and just include it using a <script> tag
              await loadRNBOScript(patcher.desc.meta.rnboversion);
          }
+
+    device = await createDevice({context: audioContext, patcher})
+    
+    device.node.connect(audioContext.destination);
 
     x = device.parametersById.get('doomFuzz/Mix');
     y = device.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
