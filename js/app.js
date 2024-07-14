@@ -14,7 +14,7 @@ function setup() {
     const WAContext = window.AudioContext || window.webkitAudioContext;
     const audioContext = new WAContext();
     loadRNBO();
-    canvas.mouseClicked(StartAudioContext);
+    canvas.mouseClicked = () => { audioContext.resume() };
     
 
 }
@@ -65,11 +65,7 @@ async function loadRNBO() {
 }
 }
 
-function StartAudioContext() {
-    if (audioContext.state === 'suspended') {
-        audioContext.resume();
-    }
-}
+
 
 function draw() {
     background(mouseY / 2, 100, 100);
