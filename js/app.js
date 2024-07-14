@@ -53,7 +53,7 @@ function draw() {
 
     let yValue = map(mouseY, height, 0, 0, 1);
 
-    let xValue = map(mousex, 0, width, 0.01, 100);
+    let xValue = map(mouseX, 0, width, 0.01, 100);
 
     yValue = yValue / 1;
 
