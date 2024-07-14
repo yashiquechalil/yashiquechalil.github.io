@@ -5,7 +5,7 @@ let x;
 
 function setup() {
     canvas = createCanvas(720, 720);
-    noCursor();
+   
     colorMode(HSB, 360, 100, 100);
     rectMode(CENTER);
 
