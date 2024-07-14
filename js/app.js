@@ -32,7 +32,7 @@ async function loadRNBO() {
      // Fetch the exported patcher
      let response, patcher;
      try {
-         response = await fetch(rawPatcher);
+         response = await fetch('export/patch.export.json');
          patcher = await response.json();
      
          if (!window.RNBO) {
