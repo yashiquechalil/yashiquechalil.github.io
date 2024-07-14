@@ -38,7 +38,7 @@ async function loadRNBO() {
 
 }
 
-function startAudioContext(){
+function StartAudioContext() {
     if (audioContext.state === 'suspended') {
         audioContext.resume();
     }
