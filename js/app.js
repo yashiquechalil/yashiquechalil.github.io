@@ -29,7 +29,7 @@ async function loadRNBO() {
 
     const patcher = await rawPatcher.json();
 
-    device = await creatDevice({ context: audioContext, patcher});
+    device = await createDevice({ context: audioContext, patcher});
     
     device.node.connect(audioContext.destination);
 
