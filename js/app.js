@@ -15,7 +15,7 @@ function setup() {
 
     loadRNBO();
 
-    canvas.mouseClicked(startAudioContext);
+    canvas.mouseClicked(StartAudioContext);
 
 }
 
