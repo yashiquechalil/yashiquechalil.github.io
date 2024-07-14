@@ -14,9 +14,11 @@ function setup() {
     const WAContext = window.AudioContext || window.webkitAudioContext;
     const audioContext = new WAContext();
 
+    canvas.mouseClicked(StartAudioContext);
+
     loadRNBO();
 
-    canvas.mouseClicked(StartAudioContext);
+    
 
 }
 
