@@ -47,7 +47,7 @@ function startAudioContext(){
 function draw() {
     background(mouseY / 2, 100, 100);
 
-    fill(360 -mouse /2, 100, 100);
+    fill(360 - mouseY /2, 100, 100);
 
     rect(360, 360, mouseX +1, mouseX +1);
 
