@@ -33,8 +33,8 @@ async function loadRNBO() {
     
     device.node.connect(audioContext.destination);
 
-    x = device.parametersById.get('x');
-    y = device.parametersById.get('y');
+    x = device.parametersById.get('doomFuzz/Mix');
+    y = device.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
 
 }
 
@@ -51,13 +51,13 @@ function draw() {
 
     rect(360, 360, mouseX +1, mouseX +1);
 
-    let yValue = map(mouseY, height, 0, 1, 1000);
+    let yValue = map(mouseY, height, 0, 0, 1);
 
-    let xValue = map(mousex, 0, width, 100, 5000);
+    let xValue = map(mousex, 0, width, 0.01, 100);
 
-    yValue = yValue / 1000;
+    yValue = yValue / 1;
 
-    xValue = xValue / 5000;
+    xValue = xValue / 100;
 
     if(y) {
         y.normalizedValue = yValue;
