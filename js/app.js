@@ -63,7 +63,7 @@ function draw() {
         y.normalizedValue = yValue;
     }
 
-    if (x) {
+    if(x) {
         x.normalizedValue = xValue;
     }
 }
