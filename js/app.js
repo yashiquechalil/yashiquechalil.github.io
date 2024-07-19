@@ -13,7 +13,7 @@ function setup() {
 
     audioContext = new (window.AudioContext || window.webkitAudioContext)(); 
     loadRNBO();
-    canvas.mouseClicked = () => { audioContext.resume() };
+    canvas.mouseClicked(StartAudioContext);
     
     
 
