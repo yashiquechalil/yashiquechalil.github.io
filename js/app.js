@@ -13,7 +13,7 @@ function setup() {
 
     audioContext = new (window.AudioContext || window.webkitAudioContext)(); 
     loadRNBO();
-    canvas.mouseClicked(StartAudioContext);
+    //canvas.mouseClicked(StartAudioContext);
     
     
 
@@ -23,7 +23,7 @@ async function loadRNBO() {
 
     const { createDevice } =  RNBO;
 
-    await audioContext.resume();
+    canvas.mouseClicked(StartAudioContext);
 
 
 /*   
