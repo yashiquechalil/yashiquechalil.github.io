@@ -54,6 +54,12 @@ async function loadRNBO() {
 }
 
 
+function StartAudioContext() {
+    if (audioContext.state === 'suspended'){
+        audioContext.resume();
+    }
+}
+
 
 
 function draw() {
@@ -79,3 +85,4 @@ function draw() {
         x.normalizedValue = xValue;
     }
 }
+
