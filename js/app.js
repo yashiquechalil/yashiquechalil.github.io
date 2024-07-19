@@ -11,10 +11,10 @@ function setup() {
 
     noStroke();
 
-    const WAContext = window.AudioContext || window.webkitAudioContext;
-    const audioContext = new WAContext();
+    audioContext = new (window.AudioContext || window.webkitAudioContext)(); 
     loadRNBO();
     canvas.mouseClicked = () => { audioContext.resume() };
+    
     
 
 }
@@ -26,46 +26,33 @@ async function loadRNBO() {
     await audioContext.resume();
 
 
-     
-     // Fetch the exported patcher
-     let response, patcher;
-     try {
-         response = await fetch('export/patch.export.json');
-         patcher = await response.json();
-     
-         if (!window.RNBO) {
-             // Load RNBO script dynamically
-             // Note that you can skip this by knowing the RNBO version of your patch
-             // beforehand and just include it using a <script> tag
-             await loadRNBOScript(patcher.desc.meta.rnboversion);
-         }
+/*   
+    // Fetch the exported patcher
+    let response, patcher;
+    try {
+        response = await fetch('export/patch.export.json');
+        patcher = await response.json();
 
-    device = await createDevice({context: audioContext, patcher})
+        if (!window.RNBO) {
+            // Load RNBO script dynamically
+            // Note that you can skip this by knowing the RNBO version of your patch
+            // beforehand and just include it using a <script> tag
+            await loadRNBOScript(patcher.desc.meta.rnboversion);
+        }
+*/
+    const rawPatcher = await fetch('export/patch.export.json');
+    const patcher = await rawPatcher.json();
+    device = await createDevice({context: audioContext, patcher});
     
     device.node.connect(audioContext.destination);
 
     x = device.parametersById.get('doomFuzz/Mix');
     y = device.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
 
-} catch (err) {
-    const errorContext = {
-        error: err
-    };
-    if (response && (response.status >= 300 || response.status < 200)) {
-        errorContext.header = `Couldn't load patcher export bundle`,
-        errorContext.description = `Check app.js to see what file it's trying to load. Currently it's` +
-        ` trying to load "${patchExportURL}". If that doesn't` + 
-        ` match the name of the file you exported from RNBO, modify` + 
-        ` patchExportURL in app.js.`;
-    }
-    if (typeof guardrails === "function") {
-        guardrails(errorContext);
-    } else {
-        throw err;
-    }
-    return;
+
+  
 }
-}
+
 
 
 
