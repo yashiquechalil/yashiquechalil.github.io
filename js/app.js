@@ -5,7 +5,7 @@ let mixParam;
 async function setup() {
     const patchExportURL = "export/patch.export.json";
 
-    canvas = createCanvas(windowWidth, windowHeigth);
+    canvas = createCanvas(windowWidth, windowHeight);
     
     colorMode(HSB, 360, 100, 100);
 
