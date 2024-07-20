@@ -1,7 +1,11 @@
+let buzzParam;
+let startParam;
+let mixParam;
+
 async function setup() {
     const patchExportURL = "export/patch.export.json";
 
-    canvas = createCanvas(720, 720);
+   //canvas = createCanvas(720, 720);
     
     colorMode(HSB, 360, 100, 100);
 
