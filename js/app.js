@@ -106,9 +106,9 @@ async function setup() {
    buzzParam = device.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
 
     document.body.onclick = () => {
-        if (context.state === 'suspended'){
-            context.resume();
-        }
+        //if (context.state === 'suspended'){
+       //     context.resume();
+       // }
         
         startParam.enumValue = 'start';
 
