@@ -107,7 +107,7 @@ async function setup() {
 
     document.body.onclick = () => {
         context.resume();
-        startParam.enumValues = 'start';
+       // startParam.enumValues = 'start';
 
     }
 
@@ -373,6 +373,10 @@ function draw() {
     yValue = yValue / 1;
 
     xValue = xValue / 100;
+
+    canvas.body.onclick = () => {
+        startParam.enumValue = 1; 
+    }
 
     if(buzzParam) {
         buzzParam.normalizedValue = yValue;
