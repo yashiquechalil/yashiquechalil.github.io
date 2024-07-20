@@ -101,6 +101,10 @@ async function setup() {
     // (Optional) Connect MIDI inputs
    // makeMIDIKeyboard(device);
 
+   startParam = device.parametersById.get('start');
+   mixParam = device.parametersById.get('doomFuzz/Mix');
+   buzzParam = device.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
+
     document.body.onclick = () => {
         context.resume();
         startParam.enumValue = 1;
@@ -127,9 +131,7 @@ function loadRNBOScript(version) {
         document.body.append(el);
     });
 
-    startParam = device.parametersById.get('start');
-    mixParam = device.parametersById.get('doomFuzz/Mix');
-    buzzParam = device.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
+
 }
 
 function makeSliders(device) {
