@@ -107,7 +107,7 @@ async function setup() {
 
     document.body.onclick = () => {
         context.resume();
-        startParam.enumValue = 1;
+        startParam.value = 1;
 
     }
 
