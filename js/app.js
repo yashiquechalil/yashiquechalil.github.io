@@ -94,7 +94,7 @@ async function setup() {
     //makeInportForm(device);
 
     // (Optional) Attach listeners to outports so you can log messages from the RNBO patcher
-    //attachOutports(device);
+    attachOutports(device);
 
     // (Optional) Load presets, if any
     //loadPresets(device, patcher);
