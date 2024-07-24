@@ -34,7 +34,7 @@ async function setup() {
 
     fft = new p5.FFT();
     let deviceNode = context.createAnalyser();
-    deviceNode.connect(context.destination);
+    deviceNode.connect(outputNode);
     
     // Set FFT input
     fft.setInput(deviceNode);
