@@ -1,6 +1,7 @@
 let buzzParam;
 let startParam;
 let mixParam;
+let fft;
 
 async function setup() {
     const patchExportURL = "export/patch.export.json";
