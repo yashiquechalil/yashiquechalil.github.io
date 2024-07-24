@@ -2,7 +2,7 @@ let buzzParam;
 let startParam;
 let mixParam;
 var fft;
-var visNode, bufferLength, dataArray;
+
 var bNormalize = true;
 var audioIsPlaying = false;
 var centerClip = 0;
@@ -34,14 +34,7 @@ async function setup() {
     outputNode.connect(context.destination);
 
     //fft = new p5.FFT();
-    const visNode = context.createAnalyser();
 
-    // …
-    
-    visNode.fftSize = 2048;
-    bufferLength = visNode.frequencyBinCount;
-    dataArray = new Uint8Array(bufferLength);
-    visNode.getByteTimeDomainData(dataArray);
 
     
     
@@ -385,6 +378,15 @@ function makeMIDIKeyboard(device) {
 }
 
 setup();
+
+const visNode = context.createAnalyser();
+
+// …
+
+visNode.fftSize = 2048;
+const bufferLength = visNode.frequencyBinCount;
+const dataArray = new Uint8Array(bufferLength);
+visNode.getByteTimeDomainData(dataArray);
 
 function draw() {
     drawVisual = requestAnimationFrame(draw);
