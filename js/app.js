@@ -2,7 +2,7 @@ let buzzParam;
 let startParam;
 let mixParam;
 var fft;
-var visNode;
+var visNode, bufferLength, dataArray;
 var bNormalize = true;
 var audioIsPlaying = false;
 var centerClip = 0;
@@ -39,8 +39,8 @@ async function setup() {
     // …
     
     visNode.fftSize = 2048;
-    const bufferLength = visNode.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
+    bufferLength = visNode.frequencyBinCount;
+    dataArray = new Uint8Array(bufferLength);
     visNode.getByteTimeDomainData(dataArray);
 
     
