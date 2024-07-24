@@ -3,6 +3,7 @@ let startParam;
 let mixParam;
 var fft;
 var bNormalize = true;
+var audioIsPlaying = false;
 var centerClip = 0;
 async function setup() {
     const patchExportURL = "export/patch.export.json";
@@ -22,6 +23,9 @@ async function setup() {
 
     //noStroke();
 
+    mic = new p5.AudioIn();
+    mic.start();
+
     // Create AudioContext
     const WAContext = window.AudioContext || window.webkitAudioContext;
     const context = new WAContext();
@@ -31,7 +35,7 @@ async function setup() {
     outputNode.connect(context.destination);
 
     fft = new p5.FFT();
-    fft.setInput(outputNode);
+    fft.setInput(mic);
     
     // Fetch the exported patcher
     let response, patcher;
@@ -503,5 +507,26 @@ function autoCorrelate(buffer) {
     }
   
     return newBuffer;
+  }
+
+  // toggle input
+function keyPressed() {
+    if (key == 'T') {
+      toggleInput();
+    }
+  }
+
+  function toggleInput() {
+    if (audioIsPlaying ) {
+        startParam.enumValue = 'stop';
+      mic.start();
+      fft.setInput(mic);
+      audioIsPlaying = false;
+    } else {
+        startParam.enumValue = 'start';
+      mic.stop();
+      fft.setInput(outputNode);
+      audioIsPlaying = true;
+    }
   }
   
