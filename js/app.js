@@ -2,6 +2,7 @@ let buzzParam;
 let startParam;
 let mixParam;
 var fft;
+var visNode;
 var bNormalize = true;
 var audioIsPlaying = false;
 var centerClip = 0;
