@@ -33,7 +33,7 @@ async function setup() {
     outputNode.connect(context.destination);
 
     fft = new p5.FFT();
-    fft.setInput(device.node);
+    
     
     // Fetch the exported patcher
     let response, patcher;
@@ -89,6 +89,8 @@ async function setup() {
         }
         return;
     }
+
+    fft.setInput(device.node);
 
     // (Optional) Load the samples
     //if (dependencies.length)
