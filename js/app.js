@@ -33,6 +33,12 @@ async function setup() {
     outputNode.connect(context.destination);
 
     fft = new p5.FFT();
+    let deviceNode = context.createAnalyser();
+    deviceNode.connect(context.destination);
+    
+    // Set FFT input
+    fft.setInput(deviceNode);
+
     
     
     // Fetch the exported patcher
@@ -89,11 +95,6 @@ async function setup() {
         }
         return;
     }
-    let deviceNode = device.node;
-    deviceNode.connect(outputNode);
-    
-    // Set FFT input
-    fft.setInput(deviceNode);
 
 
     // (Optional) Load the samples
