@@ -33,11 +33,14 @@ async function setup() {
     outputNode.connect(context.destination);
 
     fft = new p5.FFT();
-    let deviceNode = context.createAnalyser();
-    deviceNode.connect(outputNode);
+    const analyser = context.createAnalyser();
+
+    // …
     
-    // Set FFT input
-    fft.setInput(deviceNode);
+    analyser.fftSize = 2048;
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+    analyser.getByteTimeDomainData(dataArray);
 
     
     
@@ -382,137 +385,172 @@ function makeMIDIKeyboard(device) {
 
 setup();
 
-
 function draw() {
-    // background(mouseY / 2, 100, 100);
-
-    // fill(360 - mouseY/ 2, 100, 100);
-
-    // rect (360, 360, mouseX + 1, mouseX +1);
-
-    background(255, 255, 255, 100);
-  stroke(237, 34, 93, 120);
-
-  // min radius of ellipse
-  var minRad = 2;
-
-  // max radius of ellipse
-  var maxRad = height;
-
-  // array of values from -1 to 1
-  var timeDomain = fft.waveform(1024, 'float32');
-  var corrBuff = autoCorrelate(timeDomain);
-
-  var len = corrBuff.length;
-
-
-  // draw a circular shape
-  beginShape();
-
-  for (var i = 0; i < len; i++) {
-    var angle = map(i, 0, len, 0, HALF_PI);
-    var offset = map(abs(corrBuff[i]), 0, 1, 0, maxRad) + minRad;
-    var x = (offset) * cos(angle);
-    var y = (offset) * sin(angle);
-    curveVertex(x, y);
-  }
-
-  for (var i = 0; i < len; i++) {
-    var angle = map(i, 0, len, HALF_PI, PI);
-    var offset = map(abs(corrBuff[len - i]), 0, 1, 0, maxRad) + minRad;
-    var x = (offset) * cos(angle);
-    var y = (offset) * sin(angle);
-    curveVertex(x, y);
-  }
-
-  // semi circle with mirrored
-  for (var i = 0; i < len; i++) {
-    var angle = map(i, 0, len, PI, HALF_PI + PI);
-    var offset = map(abs(corrBuff[i]), 0, 1, 0, maxRad) + minRad;
-    var x = (offset) * cos(angle);
-    var y = (offset) * sin(angle);
-    curveVertex(x, y);
-  }
-
-  for (var i = 0; i < len; i++) {
-    var angle = map(i, 0, len, HALF_PI + PI, TWO_PI);
-    var offset = map(abs(corrBuff[len - i]), 0, 1, 0, maxRad) + minRad;
-    var x = (offset) * cos(angle);
-    var y = (offset) * sin(angle);
-    curveVertex(x, y);
-  }
-
-
+    drawVisual = requestAnimationFrame(draw);
   
-
-    let yValue = map(mouseY, height, 0, 0, 1);
-
-    let xValue = map(mouseX, 0, width, 0.01, 100);
-
-    yValue = yValue / 1;
-
-    xValue = xValue / 100;
-
-
-
-
-    if(buzzParam) {
-        buzzParam.normalizedValue = yValue;
-
-    }
-
-    if (mixParam){
-        mixParam.normalizedValue = xValue;
-    }
-    endShape(CLOSE);
-}
-
-function autoCorrelate(buffer) {
-    var newBuffer = [];
-    var nSamples = buffer.length;
+    analyser.getByteTimeDomainData(dataArray);
   
-    var autocorrelation = [];
+    canvasCtx.fillStyle = "rgb(200 200 200)";
+    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
   
-    // center clip removes any samples under 0.1
-    if (centerClip) {
-      var cutoff = centerClip;
-      for (var i = 0; i < buffer.length; i++) {
-        var val = buffer[i];
-        buffer[i] = Math.abs(val) > cutoff ? val : 0;
-      }
-    }
+    canvasCtx.lineWidth = 2;
+    canvasCtx.strokeStyle = "rgb(0 0 0)";
   
-    for (var lag = 0; lag < nSamples; lag++){
-      var sum = 0; 
-      for (var index = 0; index < nSamples; index++){
-        var indexLagged = index+lag;
-        var sound1 = buffer[index];
-        var sound2 = buffer[indexLagged % nSamples];
-        var product = sound1 * sound2;
-        sum += product;
+    canvasCtx.beginPath();
+  
+    const sliceWidth = (WIDTH * 1.0) / bufferLength;
+    let x = 0;
+  
+    for (let i = 0; i < bufferLength; i++) {
+      const v = dataArray[i] / 128.0;
+      const y = (v * HEIGHT) / 2;
+  
+      if (i === 0) {
+        canvasCtx.moveTo(x, y);
+      } else {
+        canvasCtx.lineTo(x, y);
       }
   
-      // average to a value between -1 and 1
-      newBuffer[lag] = sum/nSamples;
+      x += sliceWidth;
     }
   
-    if (bNormalize){
-      var biggestVal = 0;
-      for (var index = 0; index < nSamples; index++){
-        if (abs(newBuffer[index]) > biggestVal){
-          biggestVal = abs(newBuffer[index]);
-        }
-      }
-      // dont divide by zero
-      if (biggestVal !== 0) {
-        for (var index = 0; index < nSamples; index++){
-          newBuffer[index] /= biggestVal;
-        }
-      }
-    }
-  
-    return newBuffer;
+    canvasCtx.lineTo(canvas.width, canvas.height / 2);
+    canvasCtx.stroke();
   }
+  
+  draw();
+
+
+// function draw() {
+//     // background(mouseY / 2, 100, 100);
+
+//     // fill(360 - mouseY/ 2, 100, 100);
+
+//     // rect (360, 360, mouseX + 1, mouseX +1);
+
+//     background(255, 255, 255, 100);
+//   stroke(237, 34, 93, 120);
+
+//   // min radius of ellipse
+//   var minRad = 2;
+
+//   // max radius of ellipse
+//   var maxRad = height;
+
+//   // array of values from -1 to 1
+//   var timeDomain = fft.waveform(1024, 'float32');
+//   var corrBuff = autoCorrelate(timeDomain);
+
+//   var len = corrBuff.length;
+
+
+//   // draw a circular shape
+//   beginShape();
+
+//   for (var i = 0; i < len; i++) {
+//     var angle = map(i, 0, len, 0, HALF_PI);
+//     var offset = map(abs(corrBuff[i]), 0, 1, 0, maxRad) + minRad;
+//     var x = (offset) * cos(angle);
+//     var y = (offset) * sin(angle);
+//     curveVertex(x, y);
+//   }
+
+//   for (var i = 0; i < len; i++) {
+//     var angle = map(i, 0, len, HALF_PI, PI);
+//     var offset = map(abs(corrBuff[len - i]), 0, 1, 0, maxRad) + minRad;
+//     var x = (offset) * cos(angle);
+//     var y = (offset) * sin(angle);
+//     curveVertex(x, y);
+//   }
+
+//   // semi circle with mirrored
+//   for (var i = 0; i < len; i++) {
+//     var angle = map(i, 0, len, PI, HALF_PI + PI);
+//     var offset = map(abs(corrBuff[i]), 0, 1, 0, maxRad) + minRad;
+//     var x = (offset) * cos(angle);
+//     var y = (offset) * sin(angle);
+//     curveVertex(x, y);
+//   }
+
+//   for (var i = 0; i < len; i++) {
+//     var angle = map(i, 0, len, HALF_PI + PI, TWO_PI);
+//     var offset = map(abs(corrBuff[len - i]), 0, 1, 0, maxRad) + minRad;
+//     var x = (offset) * cos(angle);
+//     var y = (offset) * sin(angle);
+//     curveVertex(x, y);
+//   }
+
+
+  
+
+//     let yValue = map(mouseY, height, 0, 0, 1);
+
+//     let xValue = map(mouseX, 0, width, 0.01, 100);
+
+//     yValue = yValue / 1;
+
+//     xValue = xValue / 100;
+
+
+
+
+//     if(buzzParam) {
+//         buzzParam.normalizedValue = yValue;
+
+//     }
+
+//     if (mixParam){
+//         mixParam.normalizedValue = xValue;
+//     }
+//     endShape(CLOSE);
+// }
+
+// function autoCorrelate(buffer) {
+//     var newBuffer = [];
+//     var nSamples = buffer.length;
+  
+//     var autocorrelation = [];
+  
+//     // center clip removes any samples under 0.1
+//     if (centerClip) {
+//       var cutoff = centerClip;
+//       for (var i = 0; i < buffer.length; i++) {
+//         var val = buffer[i];
+//         buffer[i] = Math.abs(val) > cutoff ? val : 0;
+//       }
+//     }
+  
+//     for (var lag = 0; lag < nSamples; lag++){
+//       var sum = 0; 
+//       for (var index = 0; index < nSamples; index++){
+//         var indexLagged = index+lag;
+//         var sound1 = buffer[index];
+//         var sound2 = buffer[indexLagged % nSamples];
+//         var product = sound1 * sound2;
+//         sum += product;
+//       }
+  
+//       // average to a value between -1 and 1
+//       newBuffer[lag] = sum/nSamples;
+//     }
+  
+//     if (bNormalize){
+//       var biggestVal = 0;
+//       for (var index = 0; index < nSamples; index++){
+//         if (abs(newBuffer[index]) > biggestVal){
+//           biggestVal = abs(newBuffer[index]);
+//         }
+//       }
+//       // dont divide by zero
+//       if (biggestVal !== 0) {
+//         for (var index = 0; index < nSamples; index++){
+//           newBuffer[index] /= biggestVal;
+//         }
+//       }
+//     }
+  
+//     return newBuffer;
+//   }
 
 //   // toggle input
 // function keyPressed() {
