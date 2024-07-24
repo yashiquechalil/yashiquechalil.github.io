@@ -1,6 +1,7 @@
 let buzzParam;
 let startParam;
 let mixParam;
+var fft;
 
 async function setup() {
     const patchExportURL = "export/patch.export.json";
@@ -21,6 +22,9 @@ async function setup() {
     // Create gain node and connect it to audio output
     const outputNode = context.createGain();
     outputNode.connect(context.destination);
+
+    fft = new p5.FFT();
+    fft.setInput(context.destination);
     
     // Fetch the exported patcher
     let response, patcher;
@@ -94,7 +98,7 @@ async function setup() {
     //makeInportForm(device);
 
     // (Optional) Attach listeners to outports so you can log messages from the RNBO patcher
-    attachOutports(device);
+    //attachOutports(device);
 
     // (Optional) Load presets, if any
     //loadPresets(device, patcher);
@@ -377,6 +381,8 @@ function draw() {
     yValue = yValue / 1;
 
     xValue = xValue / 100;
+
+
 
 
     if(buzzParam) {
