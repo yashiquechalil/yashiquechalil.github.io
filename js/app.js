@@ -2,7 +2,8 @@ let buzzParam;
 let startParam;
 let mixParam;
 var fft;
-
+var bNormalize = true;
+var centerClip = 0;
 async function setup() {
     const patchExportURL = "export/patch.export.json";
 
