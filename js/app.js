@@ -33,14 +33,14 @@ async function setup() {
     outputNode.connect(context.destination);
 
     //fft = new p5.FFT();
-    const analyser = context.createAnalyser();
+    const visNode = context.createAnalyser();
 
     // …
     
-    analyser.fftSize = 2048;
-    const bufferLength = analyser.frequencyBinCount;
+    visNode.fftSize = 2048;
+    const bufferLength = visNode.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
-    analyser.getByteTimeDomainData(dataArray);
+    visNode.getByteTimeDomainData(dataArray);
 
     
     
@@ -388,7 +388,7 @@ setup();
 function draw() {
     drawVisual = requestAnimationFrame(draw);
   
-    analyser.getByteTimeDomainData(dataArray);
+    visNode.getByteTimeDomainData(dataArray);
   
     canvasCtx.fillStyle = "rgb(200 200 200)";
     canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
