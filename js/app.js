@@ -7,12 +7,16 @@ async function setup() {
 
     canvas = createCanvas(800, 800);
     canvas.position((windowWidth -800) /2, (windowHeight - 800)/2);
+    noFill();
     
-    colorMode(HSB, 360, 100, 100);
+      // default mode is radians
+    angleMode(RADIANS);
+    translate(width/2, height/2);
+    //colorMode(HSB, 360, 100, 100);
 
-    rectMode(CENTER);
+    //rectMode(CENTER);
 
-    noStroke();
+   // noStroke();
 
     
 
