@@ -23,8 +23,6 @@ async function setup() {
 
     //noStroke();
 
-    mic = new p5.AudioIn();
-    mic.start();
 
     // Create AudioContext
     const WAContext = window.AudioContext || window.webkitAudioContext;
@@ -35,7 +33,7 @@ async function setup() {
     outputNode.connect(context.destination);
 
     fft = new p5.FFT();
-    fft.setInput(mic);
+    fft.setInput(outputNode);
     
     // Fetch the exported patcher
     let response, patcher;
@@ -509,24 +507,24 @@ function autoCorrelate(buffer) {
     return newBuffer;
   }
 
-  // toggle input
-function keyPressed() {
-    if (key == 'T') {
-      toggleInput();
-    }
-  }
+//   // toggle input
+// function keyPressed() {
+//     if (key == 'T') {
+//       toggleInput();
+//     }
+//   }
 
-  function toggleInput() {
-    if (audioIsPlaying ) {
-        startParam.enumValue = 'stop';
-      mic.start();
-      fft.setInput(mic);
-      audioIsPlaying = false;
-    } else {
-        startParam.enumValue = 'start';
-      mic.stop();
-      fft.setInput(outputNode);
-      audioIsPlaying = true;
-    }
-  }
+//   function toggleInput() {
+//     if (audioIsPlaying ) {
+//         startParam.enumValue = 'stop';
+//       mic.start();
+//       fft.setInput(mic);
+//       audioIsPlaying = false;
+//     } else {
+//         startParam.enumValue = 'start';
+//       mic.stop();
+//       fft.setInput(outputNode);
+//       audioIsPlaying = true;
+//     }
+//   }
   
