@@ -32,7 +32,7 @@ async function setup() {
     const outputNode = context.createGain();
     outputNode.connect(context.destination);
 
-    fft = new p5.FFT();
+    //fft = new p5.FFT();
     const analyser = context.createAnalyser();
 
     // …
