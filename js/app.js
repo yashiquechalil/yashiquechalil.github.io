@@ -33,7 +33,7 @@ async function setup() {
     outputNode.connect(context.destination);
 
     fft = new p5.FFT();
-    fft.setInput(outputNode);
+    fft.setInput(device.node);
     
     // Fetch the exported patcher
     let response, patcher;
