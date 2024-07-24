@@ -89,8 +89,12 @@ async function setup() {
         }
         return;
     }
+    let deviceNode = device.node;
+    deviceNode.connect(outputNode);
+    
+    // Set FFT input
+    fft.setInput(deviceNode);
 
-    fft.setInput(device.node);
 
     // (Optional) Load the samples
     //if (dependencies.length)
