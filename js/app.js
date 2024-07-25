@@ -37,7 +37,7 @@ async function setup() {
     // Create gain node and connect it to audio output
     const outputNode = context.createGain();
 
-    visNode = connect(outputNode)
+    visNode.connect(outputNode);
     outputNode.connect(context.destination);
 
     visNode.fftSize = 2048;
