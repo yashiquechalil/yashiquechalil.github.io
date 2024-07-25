@@ -3,7 +3,7 @@ let startParam;
 let mixParam;
 var visNode;
 var bufferLength;
-var dataArray;
+
 
 async function setup() {
     const patchExportURL = "export/patch.export.json";
@@ -40,7 +40,8 @@ async function setup() {
     visNode.connect(outputNode);
     outputNode.connect(context.destination);
 
-;
+    visNode.fftSize = 2048;
+    bufferLength = visNode.frequencyBinCount;
     //visNode.getByteTimeDomainData(dataArray);
 
     
@@ -388,8 +389,8 @@ setup();
 
 
 function draw() {
-    visNode.fftSize = 2048;
-    const bufferLength = visNode.frequencyBinCount;
+    
+    
     const dataArray = new Uint8Array(bufferLength)
     const drawVisual = requestAnimationFrame(draw);
   
