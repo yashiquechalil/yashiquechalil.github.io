@@ -17,8 +17,9 @@ async function setup() {
     noFill();
 
     // default mode is radians
-    angleMode(RADIANS);
-    translate(width/2, height/2);
+    //angleMode(RADIANS);
+    //translate(width/2, height/2);
+    stroke(240);
 
     //rectMode(CENTER);
 
