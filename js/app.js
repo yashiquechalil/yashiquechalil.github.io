@@ -1,11 +1,7 @@
 let buzzParam;
 let startParam;
 let mixParam;
-var fft;
 
-var bNormalize = true;
-var audioIsPlaying = false;
-var centerClip = 0;
 async function setup() {
     const patchExportURL = "export/patch.export.json";
 
@@ -24,19 +20,28 @@ async function setup() {
 
     //noStroke();
 
+    
+
+
 
     // Create AudioContext
     const WAContext = window.AudioContext || window.webkitAudioContext;
     const context = new WAContext();
 
+    const visNode = context.createAnalyser();
+    
+
     // Create gain node and connect it to audio output
     const outputNode = context.createGain();
+
+    visNode = connect(outputNode)
     outputNode.connect(context.destination);
 
-    //fft = new p5.FFT();
+    visNode.fftSize = 2048;
+    const bufferLength = visNode.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+    visNode.getByteTimeDomainData(dataArray);
 
-
-    
     
     // Fetch the exported patcher
     let response, patcher;
@@ -379,46 +384,39 @@ function makeMIDIKeyboard(device) {
 
 setup();
 
-const visNode = context.createAnalyser();
 
-// …
-
-visNode.fftSize = 2048;
-const bufferLength = visNode.frequencyBinCount;
-const dataArray = new Uint8Array(bufferLength);
-visNode.getByteTimeDomainData(dataArray);
 
 function draw() {
-    drawVisual = requestAnimationFrame(draw);
+    const drawVisual = requestAnimationFrame(draw);
   
     visNode.getByteTimeDomainData(dataArray);
   
-    canvasCtx.fillStyle = "rgb(200 200 200)";
-    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+    canvas.fillStyle = "rgb(200 200 200)";
+    canvas.fillRect(0, 0, WIDTH, HEIGHT);
   
-    canvasCtx.lineWidth = 2;
-    canvasCtx.strokeStyle = "rgb(0 0 0)";
+    canvas.lineWidth = 2;
+    canvas.strokeStyle = "rgb(0 0 0)";
   
-    canvasCtx.beginPath();
+    canvas.beginPath();
   
-    const sliceWidth = (WIDTH * 1.0) / bufferLength;
+    const sliceWidth = (WIDTH) / bufferLength;
     let x = 0;
   
     for (let i = 0; i < bufferLength; i++) {
       const v = dataArray[i] / 128.0;
-      const y = (v * HEIGHT) / 2;
+      const y = v * (HEIGHT / 2);
   
       if (i === 0) {
-        canvasCtx.moveTo(x, y);
+        canvas.moveTo(x, y);
       } else {
-        canvasCtx.lineTo(x, y);
+        canvas.lineTo(x, y);
       }
   
       x += sliceWidth;
     }
   
-    canvasCtx.lineTo(canvas.width, canvas.height / 2);
-    canvasCtx.stroke();
+    canvas.lineTo(canvas.width, canvas.height / 2);
+    canvas.stroke();
   }
   
   draw();
