@@ -6,6 +6,7 @@ let bufferLength;
 let dataArray;
 
 
+
 async function setup() {
     const patchExportURL = "export/patch.export.json";
 
@@ -394,17 +395,17 @@ function draw() {
     background(255, 200);
   
     // get a buffer of 1024 samples over time.
-    samples = dataArray;
-    var bufLen = bufferLength;
+    //samples = dataArray;
+    //var bufLen = bufferLength;
   
     // draw snapshot of the samples
     strokeWeight(4);
     stroke(66, 244, 155);
     noFill();
     beginShape();
-    for (var i = 0; i < bufLen; i++){
-      var x = map(i, 0, bufLen, 0, width);
-      var y = map(samples[i], -1, 1, -height/2, height/2);
+    for (var i = 0; i < bufferLength; i++){
+      var x = map(i, 0, bufferLength, 0, width);
+      var y = map(dataArray[i], -1, 1, -height/2, height/2);
       vertex(x, y + height/2);
     }
     endShape();
