@@ -40,9 +40,7 @@ async function setup() {
     visNode.connect(outputNode);
     outputNode.connect(context.destination);
 
-    visNode.fftSize = 2048;
-    const bufferLength = visNode.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
+;
     //visNode.getByteTimeDomainData(dataArray);
 
     
@@ -390,6 +388,9 @@ setup();
 
 
 function draw() {
+    visNode.fftSize = 2048;
+    const bufferLength = visNode.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength)
     const drawVisual = requestAnimationFrame(draw);
   
     visNode.getByteTimeDomainData(dataArray);
