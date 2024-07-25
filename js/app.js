@@ -389,41 +389,67 @@ function makeMIDIKeyboard(device) {
 
 setup();
 
-
-
 function draw() {
-    
-    const drawVisual = requestAnimationFrame(draw);
- 
-    canvas.fillStyle = "rgb(200 200 200)";
-    canvas.fillRect(0, 0, 800, 800);
+    background(255, 200);
   
-    canvas.lineWidth = 2;
-    canvas.strokeStyle = "rgb(0 0 0)";
+    // get a buffer of 1024 samples over time.
+    samples = dataArray;
+    var bufLen = bufferLength;
   
-    canvas.beginPath();
-  
-    const sliceWidth = (800) / bufferLength;
-    let x = 0;
-  
-    for (let i = 0; i < bufferLength; i++) {
-      const v = dataArray[i] / 128.0;
-      const y = v * (800 / 2);
-  
-      if (i === 0) {
-        canvas.moveTo(x, y);
-      } else {
-        canvas.lineTo(x, y);
-      }
-  
-      x += sliceWidth;
+    // draw snapshot of the samples
+    strokeWeight(4);
+    stroke(66, 244, 155);
+    noFill();
+    beginShape();
+    for (var i = 0; i < bufLen; i++){
+      var x = map(i, 0, bufLen, 0, width);
+      var y = map(samples[i], -1, 1, -height/2, height/2);
+      vertex(x, y + height/2);
     }
+    endShape();
   
-    canvas.lineTo(canvas.width, canvas.height / 2);
-    canvas.stroke();
+    // map the oscillator frequency to mouse position
+    var freq = map(mouseX, 0, windowWidth, 1, 440);
+    osc.freq(freq, 0.01);
+    var amp = map(mouseY, height, 0, 0, 1);
+    osc.amp(amp, 0.01);
+  
+    labelStuff(freq, amp);
   }
+
+// function draw() {
+    
+//     const drawVisual = requestAnimationFrame(draw);
+ 
+//     canvas.fillStyle = "rgb(200 200 200)";
+//     canvas.fillRect(0, 0, 800, 800);
   
-  draw();
+//     canvas.lineWidth = 2;
+//     canvas.strokeStyle = "rgb(0 0 0)";
+  
+//     canvas.beginPath();
+  
+//     const sliceWidth = (800) / bufferLength;
+//     let x = 0;
+  
+//     for (let i = 0; i < bufferLength; i++) {
+//       const v = dataArray[i] / 128.0;
+//       const y = v * (800 / 2);
+  
+//       if (i === 0) {
+//         canvas.moveTo(x, y);
+//       } else {
+//         canvas.lineTo(x, y);
+//       }
+  
+//       x += sliceWidth;
+//     }
+  
+//     canvas.lineTo(canvas.width, canvas.height / 2);
+//     canvas.stroke();
+//   }
+  
+  // draw();
 
 
 // function draw() {
