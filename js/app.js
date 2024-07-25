@@ -120,7 +120,7 @@ async function setup() {
             context.resume();
         }
         
-        if (isplaying == false)
+        if (isPlaying == false)
         {
             startParam.enumValue = 'start';
             isPlaying = true;
