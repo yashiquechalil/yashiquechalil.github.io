@@ -408,13 +408,6 @@ function draw() {
     }
     endShape();
   
-    // map the oscillator frequency to mouse position
-    var freq = map(mouseX, 0, windowWidth, 1, 440);
-    osc.freq(freq, 0.01);
-    var amp = map(mouseY, height, 0, 0, 1);
-    osc.amp(amp, 0.01);
-  
-    labelStuff(freq, amp);
   }
 
 // function draw() {
