@@ -414,40 +414,6 @@ setup();
   
 //   }
 
-function draw() {
-    
-    const drawVisual = requestAnimationFrame(draw);
- 
-    canvas.fillStyle = "rgb(200 200 200)";
-    canvas.fillRect(0, 0, 800, 800);
-  
-    canvas.lineWidth = 2;
-    canvas.strokeStyle = "rgb(0 0 0)";
-  
-    canvas.beginPath();
-  
-    const sliceWidth = (800) / bufferLength;
-    let x = 0;
-  
-    for (let i = 0; i < bufferLength; i++) {
-      const v = dataArray[i] / 128.0;
-      const y = v * (800 / 2);
-  
-      if (i === 0) {
-        canvas.moveTo(x, y);
-      } else {
-        canvas.lineTo(x, y);
-      }
-  
-      x += sliceWidth;
-    }
-  
-    canvas.lineTo(canvas.width, canvas.height / 2);
-    canvas.stroke();
-  }
-  
-  draw();
-
 
 function draw() {
     // background(mouseY / 2, 100, 100);
