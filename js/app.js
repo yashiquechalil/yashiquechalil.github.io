@@ -1,7 +1,7 @@
 let buzzParam;
 let startParam;
 let mixParam;
-let isPlaying = flase;
+let isPlaying = false;
 
 
 
