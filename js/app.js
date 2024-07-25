@@ -1,6 +1,9 @@
 let buzzParam;
 let startParam;
 let mixParam;
+var visNode;
+var bufferLength;
+var dataArray;
 
 async function setup() {
     const patchExportURL = "export/patch.export.json";
