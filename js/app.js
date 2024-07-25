@@ -1,6 +1,7 @@
 let buzzParam;
 let startParam;
 let mixParam;
+let isPlaying = flase;
 
 
 
@@ -114,11 +115,22 @@ async function setup() {
    buzzParam = device.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
 
     document.body.onclick = () => {
+
         if (context.state === 'suspended'){
             context.resume();
         }
         
-        startParam.enumValue = 'start';
+        if (isplaying == false)
+        {
+            startParam.enumValue = 'start';
+            isPlaying = true;
+        }
+        else 
+        {
+            startParam.enumValue = 'stop';
+            isPlaying = false;
+        }
+        
 
     }
 
