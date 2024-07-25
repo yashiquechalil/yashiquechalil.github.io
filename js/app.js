@@ -2,7 +2,8 @@ let buzzParam;
 let startParam;
 let mixParam;
 var visNode;
-var bufferLength;
+let bufferLength;
+let dataArray;
 
 
 async function setup() {
@@ -42,6 +43,8 @@ async function setup() {
 
     visNode.fftSize = 2048;
     bufferLength = visNode.frequencyBinCount;
+    dataArray = new Uint8Array(bufferLength)
+    visNode.getByteTimeDomainData(dataArray);
     //visNode.getByteTimeDomainData(dataArray);
 
     
@@ -390,12 +393,8 @@ setup();
 
 function draw() {
     
-    
-    const dataArray = new Uint8Array(bufferLength)
     const drawVisual = requestAnimationFrame(draw);
-  
-    visNode.getByteTimeDomainData(dataArray);
-  
+ 
     canvas.fillStyle = "rgb(200 200 200)";
     canvas.fillRect(0, 0, WIDTH, HEIGHT);
   
