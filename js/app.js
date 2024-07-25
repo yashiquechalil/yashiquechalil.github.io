@@ -43,7 +43,7 @@ async function setup() {
     visNode.fftSize = 2048;
     const bufferLength = visNode.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
-    visNode.getByteTimeDomainData(dataArray);
+    //visNode.getByteTimeDomainData(dataArray);
 
     
     // Fetch the exported patcher
