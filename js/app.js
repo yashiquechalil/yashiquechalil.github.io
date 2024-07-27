@@ -58,9 +58,9 @@ function setup() {
   w = window.innerWidth // width of the browser window
   h = window.innerHeight // height of the browser window
 
-  startParam = device.parametersById.get('start');
-  mixParam = device.parametersById.get('doomFuzz/Mix');
-  buzzParam = device.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
+  startParam = doomDevice.parametersById.get('start');
+  mixParam = doomDevice.parametersById.get('doomFuzz/Mix');
+  buzzParam = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
 
   // create a canvas for drawing, with dimensions 500x500px
   canvas = createCanvas(w, h) 
