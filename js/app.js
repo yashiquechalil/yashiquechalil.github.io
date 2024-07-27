@@ -71,12 +71,14 @@ function setup() {
     startButton.style('text-decoration','none');
     startButton.style('display','inline-block');
     startButton.style('font-size','16px');
-    startButton.style('margin','0px -83px');
+    startButton.style('margin','0 50%');
+    startButton.style('position','relative');
+    startButton.style('left','-75px');
     startButton.style('width', '150px')
     startButton.style('cursor','pointer');
 
     // position the button at the center of the screen
-    startButton.position(w/2, h/2);
+
 
     // tell the button what function to call when it is pressed
     startButton.mousePressed(resumeAudio) ;
