@@ -7,77 +7,78 @@ var centerClip = 0;
 // setup RNBO and connect to p5 context
 async function rnboSetup(context) { 
 
-const patchExportURL = "export/patch.export.json";
+    const patchExportURL = "export/patch.export.json";
 
-// pass in context from p5
-const outputNode = context.createGain();
-outputNode.connect(context.destination);
+    // pass in context from p5
+    const outputNode = context.createGain();
+    outputNode.connect(context.destination);
 
-// load rnbo patch
-response = await fetch(patchExportURL);
-const doomPatcher = await response.json();
+    // load rnbo patch
+    response = await fetch(patchExportURL);
+    const doomPatcher = await response.json();
 
-const doomDevice = await RNBO.createDevice({ context, patcher: doomPatcher });
+    const doomDevice = await RNBO.createDevice({ context, patcher: doomPatcher });
 
-// link parameters to change 
-startParam = doomDevice.parametersById.get('start');
-mixParam = doomDevice.parametersById.get('doomFuzz/Mix');
-buzzParam = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
+    // link parameters to change 
+    startParam = doomDevice.parametersById.get('start');
+    mixParam = doomDevice.parametersById.get('doomFuzz/Mix');
+    buzzParam = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
 
-// establish signal chain: p5 Synth → rnbo Patch → Output
-// connect synth to reverb patch
-// synth.connect(doomDevice.node)
+    // establish signal chain: p5 Synth → rnbo Patch → Output
+    // connect synth to reverb patch
+    // synth.connect(doomDevice.node)
 
-fft.setInput(outputNode);
+    fft.setInput(outputNode);
 
-// connect reverb patch to output
-doomDevice.node.connect(outputNode);
-context.suspend();
+    // connect reverb patch to output
+    doomDevice.node.connect(outputNode);
+    context.suspend();
 }
 
 // this gets called once during initialization
 function setup() {
-  w = window.innerWidth; // width of the browser window
-  h = window.innerHeight; // height of the browser window
+    w = 800; // width of the browser window
+    h = 800; // height of the browser window
 
-  // create a canvas for drawing, with dimensions 500x500px
-  canvas = createCanvas(w, h) ;
+    // create a canvas for drawing, with dimensions 500x500px
+    canvas = createCanvas(w, h) ;
+    canvas.position((windowWidth -800) /2, (windowHeight - 800)/2);
 
-  noFill();
+    noFill();
 
-  // default mode is radians
-  angleMode(RADIANS);
-  translate(w/2, h/2);
+    // default mode is radians
+    angleMode(RADIANS);
+    translate(w/2, h/2);
 
-  // make the background of the canvas yellow
-  //background('yellow') ;
+    // make the background of the canvas yellow
+    //background('yellow') ;
 
-  // fill any shapes that you draw on screen with red
-  //fill('red'); 
+    // fill any shapes that you draw on screen with red
+    //fill('red'); 
 
-  // don't add any strokes/outlines to shapes
-  // by default they have a black stroke
-  //noStroke();
+    // don't add any strokes/outlines to shapes
+    // by default they have a black stroke
+    //noStroke();
 
-  // create button - the text inside the function call
-  // is the text displayed on screen
-  startButton = createButton('Start Sketch'); 
+    // create button - the text inside the function call
+    // is the text displayed on screen
+    startButton = createButton('Start Sketch'); 
 
-  // position the button at the center of the screen
-  startButton.position(w/2, h/2);
+    // position the button at the center of the screen
+    startButton.position(w/2, h/2);
 
-  // tell the button what function to call when it is pressed
-  startButton.mousePressed(resumeAudio) ;
+    // tell the button what function to call when it is pressed
+    startButton.mousePressed(resumeAudio) ;
 
-  context = getAudioContext(); // get p5 audio context
+    context = getAudioContext(); // get p5 audio context
 
-    fft = new p5.FFT();
+        fft = new p5.FFT();
 
- // synth = new p5.MonoSynth() // create a synth
- // synth.setADSR(10, 1, 1, 5) // set an envelope
- // synth.amp(0.1) // set a lower amplitude to be careful with volumes
+    // synth = new p5.MonoSynth() // create a synth
+    // synth.setADSR(10, 1, 1, 5) // set an envelope
+    // synth.amp(0.1) // set a lower amplitude to be careful with volumes
 
-  rnboSetup(context); // call RNBO setup function and pass in context
+    rnboSetup(context); // call RNBO setup function and pass in context
 }
 
 
