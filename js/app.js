@@ -46,7 +46,6 @@ function setup() {
 
     // default mode is radians
     angleMode(RADIANS);
-    translate(w/2, h/2);
 
     // make the background of the canvas yellow
     //background('yellow') ;
@@ -79,29 +78,6 @@ function setup() {
     rnboSetup(context); // call RNBO setup function and pass in context
 }
 
-
-// // built-in p5 function that is called when the mouse is pressed
-// function mousePressed() {
-//   // check that the audio is started
-//   if(sketchStarted == true) {
-//     // mouseX gets the X-coordinate of the mouse press
-//     // and maps the value from the range 0 - 500
-//     // to 12 (C0) - 108 (C8)
-//     let note = map(mouseX, 0, w, 12, 108);
-
-//     // play the note above, with 90 velocity
-//     // right now, for 0.1 seconds
-//     // the duration gets compounded with the envelope
-//     // synth.play(midiToFreq(note), 90, 0, 0.1)
-//     startParam.enumValue = 'start';
-
-//     // draw an ellipse at the X and Y coordinates
-//     // with a random size between 0 and 200px
-//     ellipse(mouseX, mouseY, random(200));
-//   }
-// }
-
-
 // function that will be called when startButton is pressed
 function resumeAudio() {
   sketchStarted = true; // audio is now started
@@ -118,44 +94,38 @@ function resumeAudio() {
   }
 }
 
-
-// // this gets called every render frame
-// // (which is usually 60 times per second
-// function draw() {
-//   // this will re-draw the canvas each frame (60 times per second)
-//   // with a very low opacity
-//   background('rgba(255, 255, 0, 0.05)');
-// }
-
-
+// Draw function to create 16 vertical oscilloscopes
 function draw() {
-    background(255, 255, 255, 100);
-    stroke(237, 34, 93, 120);
-    noFill();
+  background(255, 255, 255, 100);
+  stroke(237, 34, 93, 120);
 
-    // Get the waveform data
-    var waveform = fft.waveform();
+  // Get the waveform data
+  var waveform = fft.waveform();
 
-    // Number of oscilloscopes
-    var numOscilloscopes = 16;
+  // Number of oscilloscopes
+  var numOscilloscopes = 16;
 
-    // Width of each oscilloscope
-    var oscWidth = width / numOscilloscopes;
+  // Height of each oscilloscope
+  var oscHeight = height;
 
-    for (var i = 0; i < numOscilloscopes; i++) {
-        // Calculate the x position for this oscilloscope
-        var x = i * oscWidth;
+  // Width of each oscilloscope
+  var oscWidth = width / numOscilloscopes;
 
-        // Calculate the starting and ending index for this bin
-        var startIndex = Math.floor(i * waveform.length / numOscilloscopes);
-        var endIndex = Math.floor((i + 1) * waveform.length / numOscilloscopes);
+  for (var i = 0; i < numOscilloscopes; i++) {
+    // Calculate the x position for this oscilloscope
+    var x = i * oscWidth + oscWidth / 2;
 
-        // Draw the waveform for this oscilloscope
-        beginShape();
-        for (var j = startIndex; j < endIndex; j++) {
-            var y = map(waveform[j], -1, 1, height, 0);
-            vertex(x + map(j, startIndex, endIndex, 0, oscWidth), y);
-        }
-        endShape();
+    // Calculate the starting and ending index for this bin
+    var startIndex = Math.floor(i * waveform.length / numOscilloscopes);
+    var endIndex = Math.floor((i + 1) * waveform.length / numOscilloscopes);
+
+    // Draw the waveform for this oscilloscope
+    beginShape();
+    for (var j = startIndex; j < endIndex; j++) {
+      var y = map(j, startIndex, endIndex, 0, oscHeight);
+      var xOffset = map(waveform[j], -1, 1, -oscWidth / 2, oscWidth / 2);
+      vertex(x + xOffset, y);
     }
+    endShape();
+  }
 }
