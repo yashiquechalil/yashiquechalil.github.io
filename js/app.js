@@ -61,7 +61,7 @@ function setup() {
     // create button - the text inside the function call
     // is the text displayed on screen
     startButton = createButton('Start/Stop'); 
-    startButton.style('background-color', '#04AA6D');
+    startButton.style('background-color', 'red');
     startButton.style('border','none');
     startButton.style('color','white');
     startButton.style('padding','15px 32px');
@@ -77,6 +77,8 @@ function setup() {
 
     // tell the button what function to call when it is pressed
     startButton.mousePressed(resumeAudio) ;
+
+    text ('Composition: Lucas Gaudin - Spleen', 20, 20);
 
     context = getAudioContext(); // get p5 audio context
 
@@ -174,6 +176,6 @@ function draw() {
       endShape();
       //text ('Press T to start/stop');
 
-      text ('Composition: Lucas Gaudin - Spleen', 20, 20);
+      
     }
   }
