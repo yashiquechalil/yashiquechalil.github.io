@@ -71,8 +71,8 @@ function setup() {
     startButton.style('text-decoration','none');
     startButton.style('display','inline-block');
     startButton.style('font-size','16px');
-    startButton.style('margin','0 auto');
-    startButton.style('width', '300px')
+    startButton.style('margin','0 -83');
+    startButton.style('width', '150px')
     startButton.style('cursor','pointer');
 
     // position the button at the center of the screen
