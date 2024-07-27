@@ -96,36 +96,59 @@ function resumeAudio() {
 
 // Draw function to create 16 vertical oscilloscopes
 function draw() {
-  background(255, 255, 255, 100);
-  stroke(237, 34, 93, 120);
+    background(211, 211, 211); // Clear the canvas with a semi-transparent white background
+    stroke(0,0,0); // Set the stroke color to gray
+  
+    // Get the waveform data
+    var waveform = fft.waveform();
+  
+    // Number of oscilloscopes
+    var numOscilloscopes = 16;
+  
+    // Height of each oscilloscope
+    var oscHeight = height;
+  
+    // Width of each oscilloscope
+    var oscWidth = width / numOscilloscopes;
 
-  // Get the waveform data
-  var waveform = fft.waveform();
+    
+    let yValue = map(mouseY, height, 0, 0, 1);
 
-  // Number of oscilloscopes
-  var numOscilloscopes = 10;
+    let xValue = map(mouseX, 0, width, 0.01, 100);
 
-  // Height of each oscilloscope
-  var oscHeight = height;
+    yValue = yValue / 1;
 
-  // Width of each oscilloscope
-  var oscWidth = width / numOscilloscopes;
+    xValue = xValue / 100;
 
-  for (var i = 0; i < numOscilloscopes; i++) {
-    // Calculate the x position for this oscilloscope
-    var x = i * oscWidth + oscWidth / 2;
+    if(buzzParam) {
+        buzzParam.normalizedValue = yValue;
 
-    // Calculate the starting and ending index for this bin
-    var startIndex = Math.floor(i * waveform.length / numOscilloscopes);
-    var endIndex = Math.floor((i + 1) * waveform.length / numOscilloscopes);
-
-    // Draw the waveform for this oscilloscope
-    beginShape();
-    for (var j = startIndex; j < endIndex; j++) {
-      var y = map(j, startIndex, endIndex, 0, oscHeight);
-      var xOffset = map(waveform[j], -1, 1, -oscWidth / 2, oscWidth / 2);
-      vertex(x + xOffset, y);
     }
-    endShape();
+
+    if (mixParam){
+        mixParam.normalizedValue = xValue;
+    }
+  
+
+    for (var i = 0; i < numOscilloscopes; i++) {
+      // Calculate the x position for this oscilloscope
+      var x = i * oscWidth + oscWidth / 2;
+  
+      // Calculate the starting and ending index for this bin
+      var startIndex = Math.floor(i * waveform.length / numOscilloscopes);
+      var endIndex = Math.floor((i + 1) * waveform.length / numOscilloscopes);
+  
+      // Adjust the frequency display by increasing the frequency resolution
+      var frequencyMultiplier = 2; // Adjust this value to increase or decrease frequency representation
+  
+      // Draw the waveform for this oscilloscope
+      beginShape();
+      for (var j = startIndex; j < endIndex; j++) {
+        // Apply a frequency multiplier to the waveform values
+        var y = map(j * frequencyMultiplier, startIndex * frequencyMultiplier, endIndex * frequencyMultiplier, 0, oscHeight);
+        var xOffset = map(waveform[j], -1, 1, -oscWidth / 2, oscWidth / 2);
+        vertex(x + xOffset, y);
+      }
+      endShape();
+    }
   }
-}
