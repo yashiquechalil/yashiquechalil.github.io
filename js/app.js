@@ -41,8 +41,8 @@ function setup() {
 
     // create a canvas for drawing, with dimensions 500x500px
     canvas = createCanvas(w, h);
-    canvas.parent("patcherCanvas");
     canvas.position((windowWidth -w) /2, (windowHeight - h)/2);
+    canvas.parent('patcherCanvas');
 
 
     noFill();
