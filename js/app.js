@@ -61,8 +61,16 @@ function setup() {
     // create button - the text inside the function call
     // is the text displayed on screen
     startButton = createButton('Start/Stop'); 
-    startButton.style('stroke', '0');
-    startButton.style('fontSize','x-large');
+    createButton.style('background-color: #04AA6D');
+    createButton.style('border: none');
+    createButton.style('color: white');
+    createButton.style('padding: 15px 32px');
+    createButton.style('text-align: center');
+    createButton.style('text-decoration: none');
+    createButton.style('display: inline-block');
+    createButton.style('font-size: 16px');
+    createButton.style('margin: 4px 2px');
+    createButton.style('cursor: pointer');
 
     // position the button at the center of the screen
     startButton.position(w/2, h/2);
@@ -83,16 +91,18 @@ function setup() {
 
 // function that will be called when startButton is pressed
 function resumeAudio() {
-  sketchStarted = true; // audio is now started
+    sketchStarted = true; // audio is now started
 
-  // change CSS of button to hide it
-  // since we don't need it anymore
-  // startButton.style('opacity', '0') ;
+    // change CSS of button to hide it
+    // since we don't need it anymore
+    // startButton.style('opacity', '0') ;
 
-  // get the audio context from p5
-  if (getAudioContext().state !== 'running') {
-    // and resume it if it's not running already 
-    context.resume(); 
+    // get the audio context from p5
+    if (getAudioContext().state !== 'running') {
+        // and resume it if it's not running already 
+        context.resume(); 
+    }
+
     if(isPlaying == false)
     {
         startParam.enumValue = 'start';
@@ -103,12 +113,9 @@ function resumeAudio() {
         startParam.enumValue = 'stop';
         isPlaying = false;
     }
-
-
-  }
 }
 
-// Draw function to create 16 vertical oscilloscopes
+    // Draw function to create 16 vertical oscilloscopes
 function draw() {
     background(211, 211, 211); // Clear the canvas with a semi-transparent white background
     stroke(0,0,0); // Set the stroke color to gray
@@ -166,6 +173,7 @@ function draw() {
       }
       endShape();
       //text ('Press T to start/stop');
+
       text ('Composition: Lucas Gaudin - Spleen', 20, 20);
     }
   }
