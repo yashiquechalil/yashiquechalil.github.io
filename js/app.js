@@ -6,46 +6,18 @@ async function rnboSetup(context) {
 
     const patchExportURL = "export/patch.export.json";
     // pass in context from p5
-    const outputNode = context.createGain()
-    outputNode.connect(context.destination)
+    const outputNode = context.createGain();
+    outputNode.connect(context.destination);
 
     // load reverb patch
     //response = await fetch("export/rnbo.shimmerev.json")
     //const reverbPatcher = await response.json()
 
-    // Fetch the exported patcher
-    let response, patcher;
-    try {
-       response = await fetch(patchExportURL);
-       doomPatcher = await response.json();
-      
-       if (!window.RNBO) {
-          // Load RNBO script dynamically
-          // Note that you can skip this by knowing the RNBO version of your patch
-          // beforehand and just include it using a <script> tag
-          await loadRNBOScript(patcher.desc.meta.rnboversion);
-      }
-  
-    } catch (err) {
-      const errorContext = {
-          error: err
-      };
-      if (response && (response.status >= 300 || response.status < 200)) {
-          errorContext.header = `Couldn't load patcher export bundle`,
-          errorContext.description = `Check app.js to see what file it's trying to load. Currently it's` +
-         ` trying to load "${patchExportURL}". If that doesn't` + 
-          ` match the name of the file you exported from RNBO, modify` + 
-          ` patchExportURL in app.js.`;
-      }
-      if (typeof guardrails === "function") {
-          guardrails(errorContext);
-      } else {
-          throw err;
-       }
-      return;
-    }
+// load reverb patch
+response = await fetch(patchExportURL);
+const reverbPatcher = await response.json();
 
-const doomDevice = await RNBO.createDevice({ context, patcher: doomPatcher })
+const doomDevice = await RNBO.createDevice({ context, patcher: doomPatcher });
 
 // link parameters to change 
 startParam = doomDevice.parametersById.get('start');
@@ -57,45 +29,45 @@ buzzParam = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
 // synth.connect(doomDevice.node)
 
 // connect reverb patch to output
-doomDevice.node.connect(outputNode)
-context.suspend()
+doomDevice.node.connect(outputNode);
+context.suspend();
 }
 
 // this gets called once during initialization
 function setup() {
-  w = window.innerWidth // width of the browser window
-  h = window.innerHeight // height of the browser window
+  w = window.innerWidth; // width of the browser window
+  h = window.innerHeight; // height of the browser window
 
   // create a canvas for drawing, with dimensions 500x500px
-  canvas = createCanvas(w, h) 
+  canvas = createCanvas(w, h) ;
 
   // make the background of the canvas yellow
-  background('yellow') 
+  background('yellow') ;
 
   // fill any shapes that you draw on screen with red
-  fill('red') 
+  fill('red'); 
 
   // don't add any strokes/outlines to shapes
   // by default they have a black stroke
-  noStroke() 
+  noStroke();
 
   // create button - the text inside the function call
   // is the text displayed on screen
-  startButton = createButton('Start Sketch') 
+  startButton = createButton('Start Sketch'); 
 
   // position the button at the center of the screen
-  startButton.position(w/2, h/2)
+  startButton.position(w/2, h/2);
 
   // tell the button what function to call when it is pressed
-  startButton.mousePressed(resumeAudio) 
+  startButton.mousePressed(resumeAudio) ;
 
-  context = getAudioContext() // get p5 audio context
+  context = getAudioContext(); // get p5 audio context
 
  // synth = new p5.MonoSynth() // create a synth
  // synth.setADSR(10, 1, 1, 5) // set an envelope
  // synth.amp(0.1) // set a lower amplitude to be careful with volumes
 
-  rnboSetup(context) // call RNBO setup function and pass in context
+  rnboSetup(context); // call RNBO setup function and pass in context
 }
 
 
@@ -106,7 +78,7 @@ function mousePressed() {
     // mouseX gets the X-coordinate of the mouse press
     // and maps the value from the range 0 - 500
     // to 12 (C0) - 108 (C8)
-    let note = map(mouseX, 0, w, 12, 108)
+    let note = map(mouseX, 0, w, 12, 108);
 
     // play the note above, with 90 velocity
     // right now, for 0.1 seconds
@@ -116,23 +88,23 @@ function mousePressed() {
 
     // draw an ellipse at the X and Y coordinates
     // with a random size between 0 and 200px
-    ellipse(mouseX, mouseY, random(200))
+    ellipse(mouseX, mouseY, random(200));
   }
 }
 
 
 // function that will be called when startButton is pressed
 function resumeAudio() {
-  sketchStarted = true // audio is now started
+  sketchStarted = true; // audio is now started
 
   // change CSS of button to hide it
   // since we don't need it anymore
-  startButton.style('opacity', '0') 
+  startButton.style('opacity', '0') ;
 
   // get the audio context from p5
   if (getAudioContext().state !== 'running') {
     // and resume it if it's not running already 
-    context.resume() 
+    context.resume(); 
   }
 }
 
@@ -142,5 +114,5 @@ function resumeAudio() {
 function draw() {
   // this will re-draw the canvas each frame (60 times per second)
   // with a very low opacity
-  background('rgba(255, 255, 0, 0.05)')
+  background('rgba(255, 255, 0, 0.05)');
 }
