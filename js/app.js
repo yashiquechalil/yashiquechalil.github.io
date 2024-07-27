@@ -1,4 +1,3 @@
-
 let canvas, w, h, sketchStarted = false, context, fft, startParam, buzzParam, mixParam;
 var bNormalize = true;
 // if > 0, ignores levels below this threshold
@@ -42,7 +41,7 @@ function setup() {
 
     // create a canvas for drawing, with dimensions 500x500px
     canvas = createCanvas(w, h) ;
-    canvas.position((windowWidth -800) /2, (windowHeight - 800)/2);
+    canvas.position((windowWidth -w) /2, (windowHeight - h)/2);
 
     noFill();
 
@@ -72,7 +71,7 @@ function setup() {
 
     context = getAudioContext(); // get p5 audio context
 
-        fft = new p5.FFT();
+    fft = new p5.FFT();
 
     // synth = new p5.MonoSynth() // create a synth
     // synth.setADSR(10, 1, 1, 5) // set an envelope
@@ -131,109 +130,42 @@ function resumeAudio() {
 
 
 function draw() {
-    background(255, 255, 255, 100);
-    stroke(237, 34, 93, 120);
-  
-    // min radius of ellipse
-    var minRad = 2;
-  
-    // max radius of ellipse
-    var maxRad = height;
-  
-    // array of values from -1 to 1
-    var timeDomain = fft.waveform(1024, 'float32');
-    var corrBuff = autoCorrelate(timeDomain);
-  
-    var len = corrBuff.length;
-  
-  
-    // draw a circular shape
-    beginShape();
-  
-    for (var i = 0; i < len; i++) {
-      var angle = map(i, 0, len, 0, HALF_PI);
-      var offset = map(abs(corrBuff[i]), 0, 1, 0, maxRad) + minRad;
-      var x = (offset) * cos(angle);
-      var y = (offset) * sin(angle);
-      curveVertex(x, y);
+  background(255, 255, 255, 100);
+  stroke(237, 34, 93, 120);
+  fill(237, 34, 93, 120);
+
+  // Get the FFT spectrum (an array of amplitude values for each frequency bin)
+  var spectrum = fft.analyze();
+
+  // Number of oscillators
+  var numOscillators = 16;
+
+  // Frequency range for each bin (0 to 20000 Hz)
+  var binWidth = 20000 / numOscillators;
+
+  // Width of each oscillator
+  var oscWidth = width / numOscillators;
+
+  for (var i = 0; i < numOscillators; i++) {
+    // Calculate the corresponding frequency bin
+    var startFreq = i * binWidth;
+    var endFreq = (i + 1) * binWidth;
+    var startIndex = Math.floor(map(startFreq, 0, 20000, 0, spectrum.length));
+    var endIndex = Math.floor(map(endFreq, 0, 20000, 0, spectrum.length));
+
+    // Calculate the average amplitude for this frequency range
+    var sum = 0;
+    var count = 0;
+    for (var j = startIndex; j < endIndex; j++) {
+      sum += spectrum[j];
+      count++;
     }
-  
-    for (var i = 0; i < len; i++) {
-      var angle = map(i, 0, len, HALF_PI, PI);
-      var offset = map(abs(corrBuff[len - i]), 0, 1, 0, maxRad) + minRad;
-      var x = (offset) * cos(angle);
-      var y = (offset) * sin(angle);
-      curveVertex(x, y);
-    }
-  
-    // semi circle with mirrored
-    for (var i = 0; i < len; i++) {
-      var angle = map(i, 0, len, PI, HALF_PI + PI);
-      var offset = map(abs(corrBuff[i]), 0, 1, 0, maxRad) + minRad;
-      var x = (offset) * cos(angle);
-      var y = (offset) * sin(angle);
-      curveVertex(x, y);
-    }
-  
-    for (var i = 0; i < len; i++) {
-      var angle = map(i, 0, len, HALF_PI + PI, TWO_PI);
-      var offset = map(abs(corrBuff[len - i]), 0, 1, 0, maxRad) + minRad;
-      var x = (offset) * cos(angle);
-      var y = (offset) * sin(angle);
-      curveVertex(x, y);
-    }
-  
-  
-    endShape(CLOSE);
-  
+    var amplitude = sum / count;
+
+    // Map the amplitude to the height of the oscillator
+    var oscHeight = map(amplitude, 0, 255, 0, height);
+
+    // Draw the oscillator as a vertical rectangle
+    rect(i * oscWidth, height - oscHeight, oscWidth - 2, oscHeight);
   }
-  
-  
-  function autoCorrelate(buffer) {
-    var newBuffer = [];
-    var nSamples = buffer.length;
-  
-    var autocorrelation = [];
-  
-    // center clip removes any samples under 0.1
-    if (centerClip) {
-      var cutoff = centerClip;
-      for (var i = 0; i < buffer.length; i++) {
-        var val = buffer[i];
-        buffer[i] = Math.abs(val) > cutoff ? val : 0;
-      }
-    }
-  
-    for (var lag = 0; lag < nSamples; lag++){
-      var sum = 0; 
-      for (var index = 0; index < nSamples; index++){
-        var indexLagged = index+lag;
-        var sound1 = buffer[index];
-        var sound2 = buffer[indexLagged % nSamples];
-        var product = sound1 * sound2;
-        sum += product;
-      }
-  
-      // average to a value between -1 and 1
-      newBuffer[lag] = sum/nSamples;
-    }
-  
-    if (bNormalize){
-      var biggestVal = 0;
-      for (var index = 0; index < nSamples; index++){
-        if (abs(newBuffer[index]) > biggestVal){
-          biggestVal = abs(newBuffer[index]);
-        }
-      }
-      // dont divide by zero
-      if (biggestVal !== 0) {
-        for (var index = 0; index < nSamples; index++){
-          newBuffer[index] /= biggestVal;
-        }
-      }
-    }
-  
-    return newBuffer;
-  }
-  
-  
+}
