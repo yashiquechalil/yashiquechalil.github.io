@@ -5,7 +5,6 @@ var centerClip = 0;
 
 // setup RNBO and connect to p5 context
 async function rnboSetup(context) { 
-
     const patchExportURL = "export/patch.export.json";
 
     // pass in context from p5
@@ -130,42 +129,33 @@ function resumeAudio() {
 
 
 function draw() {
-  background(255, 255, 255, 100);
-  stroke(237, 34, 93, 120);
-  fill(237, 34, 93, 120);
+    background(255, 255, 255, 100);
+    stroke(237, 34, 93, 120);
+    noFill();
 
-  // Get the FFT spectrum (an array of amplitude values for each frequency bin)
-  var spectrum = fft.analyze();
+    // Get the waveform data
+    var waveform = fft.waveform();
 
-  // Number of oscillators
-  var numOscillators = 16;
+    // Number of oscilloscopes
+    var numOscilloscopes = 16;
 
-  // Frequency range for each bin (0 to 20000 Hz)
-  var binWidth = 20000 / numOscillators;
+    // Width of each oscilloscope
+    var oscWidth = width / numOscilloscopes;
 
-  // Width of each oscillator
-  var oscWidth = width / numOscillators;
+    for (var i = 0; i < numOscilloscopes; i++) {
+        // Calculate the x position for this oscilloscope
+        var x = i * oscWidth;
 
-  for (var i = 0; i < numOscillators; i++) {
-    // Calculate the corresponding frequency bin
-    var startFreq = i * binWidth;
-    var endFreq = (i + 1) * binWidth;
-    var startIndex = Math.floor(map(startFreq, 0, 20000, 0, spectrum.length));
-    var endIndex = Math.floor(map(endFreq, 0, 20000, 0, spectrum.length));
+        // Calculate the starting and ending index for this bin
+        var startIndex = Math.floor(i * waveform.length / numOscilloscopes);
+        var endIndex = Math.floor((i + 1) * waveform.length / numOscilloscopes);
 
-    // Calculate the average amplitude for this frequency range
-    var sum = 0;
-    var count = 0;
-    for (var j = startIndex; j < endIndex; j++) {
-      sum += spectrum[j];
-      count++;
+        // Draw the waveform for this oscilloscope
+        beginShape();
+        for (var j = startIndex; j < endIndex; j++) {
+            var y = map(waveform[j], -1, 1, height, 0);
+            vertex(x + map(j, startIndex, endIndex, 0, oscWidth), y);
+        }
+        endShape();
     }
-    var amplitude = sum / count;
-
-    // Map the amplitude to the height of the oscillator
-    var oscHeight = map(amplitude, 0, 255, 0, height);
-
-    // Draw the oscillator as a vertical rectangle
-    rect(i * oscWidth, height - oscHeight, oscWidth - 2, oscHeight);
-  }
 }
