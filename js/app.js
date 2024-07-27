@@ -35,12 +35,12 @@ async function rnboSetup(context) {
 
 // this gets called once during initialization
 function setup() {
-    w = 800; // width of the browser window
-    h = 800; // height of the browser window
+    w = windowWidth; // width of the browser window
+    h = windowHeight; // height of the browser window
 
     // create a canvas for drawing, with dimensions 500x500px
     canvas = createCanvas(w, h) ;
-    canvas.position((windowWidth -w) /2, (windowHeight - h)/2);
+
 
     noFill();
 
@@ -103,7 +103,7 @@ function draw() {
   var waveform = fft.waveform();
 
   // Number of oscilloscopes
-  var numOscilloscopes = 16;
+  var numOscilloscopes = 10;
 
   // Height of each oscilloscope
   var oscHeight = height;
