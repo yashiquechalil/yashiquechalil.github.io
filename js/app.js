@@ -1,5 +1,6 @@
 let canvas, w, h, sketchStarted = false, context, fft, startParam, buzzParam, mixParam;
 var bNormalize = true;
+let isPlaying = false;
 // if > 0, ignores levels below this threshold
 var centerClip = 0;
 
@@ -59,7 +60,9 @@ function setup() {
 
     // create button - the text inside the function call
     // is the text displayed on screen
-    startButton = createButton('Start Sketch'); 
+    startButton = createButton('Start/Stop'); 
+    startButton.style('stroke', '0');
+    startButton.style('fontSize','x-large');
 
     // position the button at the center of the screen
     startButton.position(w/2, h/2);
@@ -84,13 +87,24 @@ function resumeAudio() {
 
   // change CSS of button to hide it
   // since we don't need it anymore
-  startButton.style('opacity', '0') ;
+  // startButton.style('opacity', '0') ;
 
   // get the audio context from p5
   if (getAudioContext().state !== 'running') {
     // and resume it if it's not running already 
     context.resume(); 
-    startParam.enumValue = 'start';
+    if(isPlaying == false)
+    {
+        startParam.enumValue = 'start';
+        isPlaying = true;
+    }
+    else
+    {
+        startParam.enumValue = 'stop';
+        isPlaying = false;
+    }
+
+
   }
 }
 
@@ -98,6 +112,7 @@ function resumeAudio() {
 function draw() {
     background(211, 211, 211); // Clear the canvas with a semi-transparent white background
     stroke(0,0,0); // Set the stroke color to gray
+    strokeWeight(2); // Change this value to adjust the thickness of the lines
   
     // Get the waveform data
     var waveform = fft.waveform();
@@ -150,5 +165,7 @@ function draw() {
         vertex(x + xOffset, y);
       }
       endShape();
+      //text ('Press T to start/stop');
+      text ('Composition: Lucas Gaudin - Spleen', 20, 20);
     }
   }
