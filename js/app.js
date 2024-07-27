@@ -44,6 +44,11 @@ async function rnboSetup(context) { // pass in context from p5
 
   const doomDevice = await RNBO.createDevice({ context, patcher: doomPatcher })
 
+  // link parameters to change 
+  startParam = doomDevice.parametersById.get('start');
+  mixParam = doomDevice.parametersById.get('doomFuzz/Mix');
+  buzzParam = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
+
   // establish signal chain: p5 Synth → Reverb Patch → Output
   // connect synth to reverb patch
  // synth.connect(doomDevice.node)
@@ -57,10 +62,6 @@ async function rnboSetup(context) { // pass in context from p5
 function setup() {
   w = window.innerWidth // width of the browser window
   h = window.innerHeight // height of the browser window
-
-  startParam = doomDevice.parametersById.get('start');
-  mixParam = doomDevice.parametersById.get('doomFuzz/Mix');
-  buzzParam = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
 
   // create a canvas for drawing, with dimensions 500x500px
   canvas = createCanvas(w, h) 
