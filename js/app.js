@@ -173,8 +173,6 @@ function draw() {
       }
       endShape();
 
-      text ('Composition: Lucas Gaudin - Spleen', 20, 20);
-
       
     }
   }
