@@ -78,8 +78,6 @@ function setup() {
     // tell the button what function to call when it is pressed
     startButton.mousePressed(resumeAudio) ;
 
-    text ('Composition: Lucas Gaudin - Spleen', 20, 20);
-
     context = getAudioContext(); // get p5 audio context
 
     fft = new p5.FFT();
@@ -174,7 +172,8 @@ function draw() {
         vertex(x + xOffset, y);
       }
       endShape();
-      //text ('Press T to start/stop');
+
+      text ('Composition: Lucas Gaudin - Spleen', 20, 20);
 
       
     }
