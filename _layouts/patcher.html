@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  {% include head.html %}
+  <body>
+    <div  id="patcherCanvas">
+      <script type="text/javascript" src="js/app.js"></script> 
+    </div>
+    <div class="container">
+      {% include header.html %}
+      <div class="content-wrapper">
+        
+        {{ content }}
+      </div>
+    </div>
+    {% include footer.html %}
+  </body>
+</html>

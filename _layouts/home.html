@@ -1,31 +1,23 @@
-<!doctype html>
-<html>
-  {% include head.html %}
-  <body>
-    {% include header.html %}
-    <div id="patcherCanvas">
-      <script type="text/javascript" src="js/app.js"></script> 
-    </div>
-    <div class="container">
+---
+layout: patcher
+title: Home
+---
 
-      <div class="content-wrapper">
+
+<body>
+  <div>
         <!-- (Optional) The guardrails.js script isn't required for RNBO to work, and you can skip including it -->
-        <!-- It simply offers some helpful error messages for common problems -->
-        <script type="text/javascript" src="js/guardrails.js"></script>
+    <!-- It simply offers some helpful error messages for common problems -->
+    <script type="text/javascript" src="js/guardrails.js"></script>
 
-        <!-- Import RNBO Engine Wrapper -->
-        <!-- Make sure to include the RNBO engine version to the version of your exported code, found in rnbopackage.json -->
-        
-        <div>
-          <p style="text-align:center;">Composition: Lucas Gaudin: Spleen</p>
-        </div>
-      </div>
-      {% include footer.html %}
-    </div>
-  </body>
+    <!-- Import RNBO Engine Wrapper -->
+    <!-- Make sure to include the RNBO engine version to the version of your exported code, found in rnbopackage.json -->
+    
+  </div>
 
-</html>
+  <div>
+    <p style="text-align:center;">Composition: Lucas Gaudin: Spleen</p>
+  </div>
 
-
-
+</body>
 
