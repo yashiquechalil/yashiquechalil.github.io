@@ -1,61 +1,64 @@
 
-let canvas, w, h, sketchStarted = false, context, synth
+let canvas, w, h, sketchStarted = false, context, synth, startParam, buzzParam, mixParam;
 
 // setup RNBO and connect to p5 context
-async function rnboSetup(context) { // pass in context from p5
-  const outputNode = context.createGain()
-  outputNode.connect(context.destination)
+async function rnboSetup(context) { 
 
-  // load reverb patch
-  //response = await fetch("export/rnbo.shimmerev.json")
-  //const reverbPatcher = await response.json()
+    const patchExportURL = "export/patch.export.json";
+    // pass in context from p5
+    const outputNode = context.createGain()
+    outputNode.connect(context.destination)
 
-      // Fetch the exported patcher
-      let response, patcher;
-      try {
-          response = await fetch(patchExportURL);
-          doomPatcher = await response.json();
+    // load reverb patch
+    //response = await fetch("export/rnbo.shimmerev.json")
+    //const reverbPatcher = await response.json()
+
+    // Fetch the exported patcher
+    let response, patcher;
+    try {
+       response = await fetch(patchExportURL);
+       doomPatcher = await response.json();
       
-          if (!window.RNBO) {
-              // Load RNBO script dynamically
-              // Note that you can skip this by knowing the RNBO version of your patch
-              // beforehand and just include it using a <script> tag
-              await loadRNBOScript(patcher.desc.meta.rnboversion);
-          }
-  
-      } catch (err) {
-          const errorContext = {
-              error: err
-          };
-          if (response && (response.status >= 300 || response.status < 200)) {
-              errorContext.header = `Couldn't load patcher export bundle`,
-              errorContext.description = `Check app.js to see what file it's trying to load. Currently it's` +
-              ` trying to load "${patchExportURL}". If that doesn't` + 
-              ` match the name of the file you exported from RNBO, modify` + 
-              ` patchExportURL in app.js.`;
-          }
-          if (typeof guardrails === "function") {
-              guardrails(errorContext);
-          } else {
-              throw err;
-          }
-          return;
+       if (!window.RNBO) {
+          // Load RNBO script dynamically
+          // Note that you can skip this by knowing the RNBO version of your patch
+          // beforehand and just include it using a <script> tag
+          await loadRNBOScript(patcher.desc.meta.rnboversion);
       }
+  
+    } catch (err) {
+      const errorContext = {
+          error: err
+      };
+      if (response && (response.status >= 300 || response.status < 200)) {
+          errorContext.header = `Couldn't load patcher export bundle`,
+          errorContext.description = `Check app.js to see what file it's trying to load. Currently it's` +
+         ` trying to load "${patchExportURL}". If that doesn't` + 
+          ` match the name of the file you exported from RNBO, modify` + 
+          ` patchExportURL in app.js.`;
+      }
+      if (typeof guardrails === "function") {
+          guardrails(errorContext);
+      } else {
+          throw err;
+       }
+      return;
+    }
 
-  const doomDevice = await RNBO.createDevice({ context, patcher: doomPatcher })
+const doomDevice = await RNBO.createDevice({ context, patcher: doomPatcher })
 
-  // link parameters to change 
-  startParam = doomDevice.parametersById.get('start');
-  mixParam = doomDevice.parametersById.get('doomFuzz/Mix');
-  buzzParam = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
+// link parameters to change 
+startParam = doomDevice.parametersById.get('start');
+mixParam = doomDevice.parametersById.get('doomFuzz/Mix');
+buzzParam = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
 
-  // establish signal chain: p5 Synth → Reverb Patch → Output
-  // connect synth to reverb patch
- // synth.connect(doomDevice.node)
+// establish signal chain: p5 Synth → Reverb Patch → Output
+// connect synth to reverb patch
+// synth.connect(doomDevice.node)
 
-  // connect reverb patch to output
-  doomDevice.node.connect(outputNode)
-  context.suspend()
+// connect reverb patch to output
+doomDevice.node.connect(outputNode)
+context.suspend()
 }
 
 // this gets called once during initialization
