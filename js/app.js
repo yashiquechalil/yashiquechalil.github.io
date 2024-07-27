@@ -111,7 +111,7 @@ function draw() {
     // Width of each oscilloscope
     var oscWidth = width / numOscilloscopes;
 
-    
+
     let yValue = map(mouseY, height, 0, 0, 1);
 
     let xValue = map(mouseX, 0, width, 0.01, 100);
@@ -139,7 +139,7 @@ function draw() {
       var endIndex = Math.floor((i + 1) * waveform.length / numOscilloscopes);
   
       // Adjust the frequency display by increasing the frequency resolution
-      var frequencyMultiplier = 2; // Adjust this value to increase or decrease frequency representation
+      var frequencyMultiplier = 5; // Adjust this value to increase or decrease frequency representation
   
       // Draw the waveform for this oscilloscope
       beginShape();
