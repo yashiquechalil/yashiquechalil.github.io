@@ -15,7 +15,7 @@ async function rnboSetup(context) {
 
 // load reverb patch
 response = await fetch(patchExportURL);
-const reverbPatcher = await response.json();
+const doomPatcher = await response.json();
 
 const doomDevice = await RNBO.createDevice({ context, patcher: doomPatcher });
 
