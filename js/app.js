@@ -61,16 +61,16 @@ function setup() {
     // create button - the text inside the function call
     // is the text displayed on screen
     startButton = createButton('Start/Stop'); 
-    createButton.style('background-color: #04AA6D');
-    createButton.style('border: none');
-    createButton.style('color: white');
-    createButton.style('padding: 15px 32px');
-    createButton.style('text-align: center');
-    createButton.style('text-decoration: none');
-    createButton.style('display: inline-block');
-    createButton.style('font-size: 16px');
-    createButton.style('margin: 4px 2px');
-    createButton.style('cursor: pointer');
+    createButton.style('background-color', '#04AA6D');
+    createButton.style('border','none');
+    createButton.style('color','white');
+    createButton.style('padding','15px 32px');
+    createButton.style('text-align','center');
+    createButton.style('text-decoration','none');
+    createButton.style('display','inline-block');
+    createButton.style('font-size','16px');
+    createButton.style('margin','4px 2px');
+    createButton.style('cursor','pointer');
 
     // position the button at the center of the screen
     startButton.position(w/2, h/2);
