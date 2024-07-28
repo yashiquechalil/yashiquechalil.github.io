@@ -83,7 +83,7 @@ function setup() {
 
     context = getAudioContext(); // get p5 audio context
 
-    fft = new p5.FFT(0.8, 8192);
+    fft = new p5.FFT(0.8, 2048);
 
     // synth = new p5.MonoSynth() // create a synth
     // synth.setADSR(10, 1, 1, 5) // set an envelope
