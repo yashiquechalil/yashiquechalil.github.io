@@ -83,7 +83,7 @@ function setup() {
 
     context = getAudioContext(); // get p5 audio context
 
-    fft = new p5.FFT();
+    fft = new p5.FFT(0.8, 2048);
 
     // synth = new p5.MonoSynth() // create a synth
     // synth.setADSR(10, 1, 1, 5) // set an envelope
@@ -170,7 +170,7 @@ function draw() {
       beginShape();
       for (var j = startIndex; j < endIndex; j++) {
 
-        var y = map(j * frequencyMultiplier, startIndex * frequencyMultiplier, endIndex * frequencyMultiplier, 0, oscHeight);
+        var y = map(j , startIndex, endIndex, 0, oscHeight);
         var xOffset = map(waveform[j], -1, 1, -oscWidth / 2, oscWidth / 2);
         vertex(x + xOffset, y);
       }
