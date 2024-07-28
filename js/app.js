@@ -164,12 +164,12 @@ function draw() {
       var endIndex = Math.floor((i + 1) * waveform.length / numOscilloscopes);
   
       // Adjust the frequency display by increasing the frequency resolution
-      var frequencyMultiplier = 5; // Adjust this value to increase or decrease frequency representation
+      var frequencyMultiplier = 40; // Adjust this value to increase or decrease frequency representation
   
       // Draw the waveform for this oscilloscope
       beginShape();
       for (var j = startIndex; j < endIndex; j++) {
-        // Apply a frequency multiplier to the waveform values
+
         var y = map(j * frequencyMultiplier, startIndex * frequencyMultiplier, endIndex * frequencyMultiplier, 0, oscHeight);
         var xOffset = map(waveform[j], -1, 1, -oscWidth / 2, oscWidth / 2);
         vertex(x + xOffset, y);
