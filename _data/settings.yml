@@ -7,9 +7,9 @@ disqus:
 google-ID: ''
 
 menu:
-- {name: 'Sound Design',       url: 'design'}
-- {name: 'Audio Dev',          url: 'dev'}
-- {name: 'Other',              url: 'other'}
+# - {name: 'Sound Design',       url: 'design'}
+# - {name: 'Audio Dev',          url: 'dev'}
+# - {name: 'Other',              url: 'other'}
 - {name: 'About',              url: 'about'}
 # - {name: 'Contact',            url: 'contact'}
 
