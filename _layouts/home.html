@@ -76,26 +76,35 @@ title: Home
   </div>
 
   <script>
-    // Get reference to the sidebar
-    const sidenav = document.getElementById("mySidenav");
-
-    window.addEventListener("scroll", function() {
-      // Calculate the total page height
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const windowHeight = window.innerHeight;
-      const docHeight = document.documentElement.scrollHeight;
-      
-      // Calculate the scroll percentage
-      const scrollPercent = (scrollTop / (docHeight - windowHeight)) * 100;
-
-      // Check if the user has scrolled more than 20%
-      if (scrollPercent > 20) {
-        sidenav.style.left = "0"; // Slide the sidebar into view
-      } else {
-        sidenav.style.left = "-160px"; // Hide the sidebar
-      }
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidenav = document.querySelector('.sidenav');
+        let timeout;
+    
+        function showSidebar() {
+            sidenav.classList.add('active');
+            sidenav.classList.remove('hidden');
+            resetTimeout();
+        }
+    
+        function hideSidebar() {
+            sidenav.classList.remove('active');
+            sidenav.classList.add('hidden');
+        }
+    
+        function resetTimeout() {
+            clearTimeout(timeout);
+            timeout = setTimeout(hideSidebar, 3000); // Hide after 3 seconds of inactivity
+        }
+    
+        document.addEventListener('mousemove', showSidebar);
+        document.addEventListener('keypress', showSidebar);
+        document.addEventListener('scroll', showSidebar);
+    
+        // Initially show the sidebar if needed
+        showSidebar();
     });
-  </script>
+    </script>
+    
 
   <style>
 

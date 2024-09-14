@@ -57,22 +57,21 @@ h2, em {
 /* Sidebar styles */
 .sidenav {
     height: 100%;
-    width: 150%;
+    width: 160px;
     position: fixed;
     z-index: 1;
     top: 0;
-    left: -150%px; /* Sidebar is hidden initially */
-    background-color: rgba(17, 17, 17, 0.021); /* Transparent background with slight black tint */
-    
+    left: -160px; /* Sidebar is hidden initially */
+    background-color: rgba(17, 17, 17, 0.5); /* Transparent background with slight black tint */
     overflow-x: hidden;
     padding-top: 20px;
-    transition: 0.5s; /* Smooth transition for slide */
+    transition: left 0.5s; /* Smooth transition for slide */
 }
 
 .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 25px;
     color: #818181;
     display: block;
 }
@@ -83,4 +82,8 @@ h2, em {
 
 .sidenav.active {
     left: 0; /* Sidebar slides in when active */
+}
+
+.sidenav.hidden {
+    left: -160px; /* Sidebar is hidden */
 }
