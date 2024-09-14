@@ -109,8 +109,11 @@ title: Home
             const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
     
             if (scrollPercentage > 20) {
-                showSidebar();
-                
+                showSidebar();                
+            }
+            else 
+            {
+              hideSidebar();
             }
         }
     
