@@ -3,18 +3,25 @@ layout: patcher
 title: Home
 ---
 
-
 <body>
   <div>
-        <!-- (Optional) The guardrails.js script isn't required for RNBO to work, and you can skip including it -->
+    <!-- (Optional) The guardrails.js script isn't required for RNBO to work, and you can skip including it -->
     <!-- It simply offers some helpful error messages for common problems -->
     <script type="text/javascript" src="js/guardrails.js"></script>
 
     <!-- Import RNBO Engine Wrapper -->
     <!-- Make sure to include the RNBO engine version to the version of your exported code, found in rnbopackage.json -->
-    
   </div>
-  <div style ="  width: 100vw; position: relative; left: calc(-50vw + 50%);" id="patcherCanvas">
+
+  <!-- Sidebar -->
+  <div class="sidenav" id="mySidenav">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#clients">Clients</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <div style="  width: 100vw; position: relative; left: calc(-50vw + 50%);" id="patcherCanvas">
     <script type="text/javascript" src="js/app.js"></script> 
   </div>
 
@@ -28,40 +35,32 @@ title: Home
   </div>
 
   <div style="position:relative;padding-top:30%;">
-
     <h1>AI</h1>
-    <iframe width="100%" height="max-height" style = "aspect-ratio:16 / 9;"  src="https://www.youtube.com/embed/zioyLQRZVgg?si=4p9NkIpPWHLpw8ig" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="100%" height="max-height" style="aspect-ratio:16 / 9;" src="https://www.youtube.com/embed/zioyLQRZVgg?si=4p9NkIpPWHLpw8ig" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     <p style="text-align:center; font-size: medium; font-weight: bold;">This audio was synthesized using an AI model I developed, trained specifically on sounds that reflect the sensory world (umwelt) of plants.</p>
     <p style="text-align:center; font-size: medium; font-weight: bold;">Model reliability Engineer at Datamind Audio Ltd. Read <a href="https://yashiquechalil.com/ai"> more.</a> </p>
-
   </div>
 
   <div style="position:relative;padding-top:30%;">
-
     <h1>HIVE</h1>
-    <video width="100%" height="100%" controls  poster="{{ site.github.url }}/assets/img/hivev1img.jpg"> 
+    <video width="100%" height="100%" controls poster="{{ site.github.url }}/assets/img/hivev1img.jpg"> 
       <source src="{{ site.github.url }}/assets/vid/hivev1.mp4" type="video/mp4" >
       Your browser does not support the video tag.
     </video>
     <p style="text-align:center; font-size: medium; font-weight: bold;">An embedded framework for quick prototyping of Programmable Digital Music Instruments (DMIs)</p>
-    <p style="text-align:center; font-size: medium; font-weight: bold;">Read <a href="https://yashiquechalil.com/hive"> more.</a></a> </p>
-
+    <p style="text-align:center; font-size: medium; font-weight: bold;">Read <a href="https://yashiquechalil.com/hive"> more.</a> </p>
   </div>
 
   <div style="position:relative;padding-top:30%;">
-
     <h1>Virtual Sound Environment</h1>
-    <video width="100%" height="100%" controls  poster="{{ site.github.url }}/assets/img/hept2img.jpg"> 
+    <video width="100%" height="100%" controls poster="{{ site.github.url }}/assets/img/hept2img.jpg"> 
       <source src="{{ site.github.url }}/assets/vid/hept2vid.mp4" type="video/mp4" >
       Your browser does not support the video tag.
     </video>
     <p style="text-align:center; font-size: medium; font-weight: bold;">An interactive sound environment exploring the world of heptapod sound drones.</p>
-    <!-- <p style="text-align:center; font-size: medium; font-weight: bold;">Read <a href="https://yashiquechalil.com/hive"> more.</a></a> </p> -->
-
   </div>
 
   <div style="position:relative;padding-top:30%;">
-
     <h1>순수박물관 예주은</h1>
     <h1>The Pure Exhibition</h1>
     <video width="100%" height="100%" controls poster="{{ site.github.url }}/assets/img/exhibitionimg.png">
@@ -69,9 +68,36 @@ title: Home
       Your browser does not support the video tag.
     </video>
     <p style="text-align:center; font-size: medium; font-weight: bold;">Sound Design/Mixing</p>
-    <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1910442386&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/yash-que-chalil" title="yashique" target="_blank" style="color: #cccccc; text-decoration: none;">yashique</a> · <a href="https://soundcloud.com/yash-que-chalil/vox-aeterna" title="Vox Aeterna" target="_blank" style="color: #cccccc; text-decoration: none;">Vox Aeterna</a></div>
-
+    <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1910442386&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+    <div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
+      <a href="https://soundcloud.com/yash-que-chalil" title="yashique" target="_blank" style="color: #cccccc; text-decoration: none;">yashique</a> · 
+      <a href="https://soundcloud.com/yash-que-chalil/vox-aeterna" title="Vox Aeterna" target="_blank" style="color: #cccccc; text-decoration: none;">Vox Aeterna</a>
+    </div>
   </div>
 
-</body>
+  <script>
+    // Get reference to the sidebar
+    const sidenav = document.getElementById("mySidenav");
 
+    window.addEventListener("scroll", function() {
+      // Calculate the total page height
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+      
+      // Calculate the scroll percentage
+      const scrollPercent = (scrollTop / (docHeight - windowHeight)) * 100;
+
+      // Check if the user has scrolled more than 20%
+      if (scrollPercent > 20) {
+        sidenav.style.left = "0"; // Slide the sidebar into view
+      } else {
+        sidenav.style.left = "-160px"; // Hide the sidebar
+      }
+    });
+  </script>
+
+  <style>
+
+  </style>
+</body>
