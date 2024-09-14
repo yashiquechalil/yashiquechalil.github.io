@@ -64,7 +64,7 @@ h2, em {
     left: -160px; /* Sidebar is hidden initially */
     background-color: rgba(17, 17, 17, 0); /* Transparent background with slight black tint */
     overflow-x: hidden;
-    padding-top: 20px;
+    padding-top: 20%;
     transition: left 0.5s; /* Smooth transition for slide */
 }
 
