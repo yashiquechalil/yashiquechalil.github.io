@@ -57,12 +57,13 @@ h2, em {
 /* Sidebar styles */
 .sidenav {
     height: 100%;
-    width: 160px;
+    width: 20%;
     position: fixed;
     z-index: 1;
     top: 0;
     left: -160px; /* Sidebar is hidden initially */
-    background-color: #111;
+    background-color: rgba(17, 17, 17, 0.5); /* Transparent background with slight black tint */
+    
     overflow-x: hidden;
     padding-top: 20px;
     transition: 0.5s; /* Smooth transition for slide */
