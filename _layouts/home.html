@@ -110,6 +110,7 @@ title: Home
     
             if (scrollPercentage > 20) {
                 showSidebar();
+                
             }
         }
     
@@ -122,7 +123,7 @@ title: Home
         // Event listeners for user activity
         //document.addEventListener('mousemove', showSidebar);
        // document.addEventListener('keypress', showSidebar);
-        document.addEventListener('scroll', showSidebar);
+        document.addEventListener('scroll',checkScroll );
     
         // Initially show the sidebar if needed
         //showSidebar();
