@@ -74,21 +74,27 @@ title: Home
       <a href="https://soundcloud.com/yash-que-chalil/vox-aeterna" title="Vox Aeterna" target="_blank" style="color: #cccccc; text-decoration: none;">Vox Aeterna</a>
     </div>
   </div>
-
   <script>
     document.addEventListener('DOMContentLoaded', function() {
         const sidenav = document.querySelector('.sidenav');
         let timeout;
+        let sidebarVisible = false;
     
         function showSidebar() {
-            sidenav.classList.add('active');
-            sidenav.classList.remove('hidden');
+            if (!sidebarVisible) {
+                sidenav.classList.add('active');
+                sidenav.classList.remove('hidden');
+                sidebarVisible = true;
+            }
             resetTimeout();
         }
     
         function hideSidebar() {
-            sidenav.classList.remove('active');
-            sidenav.classList.add('hidden');
+            if (sidebarVisible) {
+                sidenav.classList.remove('active');
+                sidenav.classList.add('hidden');
+                sidebarVisible = false;
+            }
         }
     
         function resetTimeout() {
@@ -96,8 +102,26 @@ title: Home
             timeout = setTimeout(hideSidebar, 3000); // Hide after 3 seconds of inactivity
         }
     
-        //document.addEventListener('mousemove', showSidebar);
-        //document.addEventListener('keypress', showSidebar);
+        function checkScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const documentHeight = document.documentElement.scrollHeight;
+            const windowHeight = window.innerHeight;
+            const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+    
+            if (scrollPercentage > 20) {
+                showSidebar();
+            }
+        }
+    
+        // Listen for scroll events
+        window.addEventListener('scroll', checkScroll);
+    
+        // Initially check the scroll position in case the user is already past 20%
+        checkScroll();
+    
+        // Event listeners for user activity
+        document.addEventListener('mousemove', showSidebar);
+        document.addEventListener('keypress', showSidebar);
         document.addEventListener('scroll', showSidebar);
     
         // Initially show the sidebar if needed
@@ -105,8 +129,4 @@ title: Home
     });
     </script>
     
-
-  <style>
-
-  </style>
 </body>
