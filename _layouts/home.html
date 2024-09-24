@@ -23,12 +23,6 @@ title: Home
     <a href="https://yashiquechalil.com/ise"> Interactive Sound Env</a>
     <a href="https://yashiquechalil.com/DSP">DSP</a>
   </div>
-  
-  <!-- Hamburger menu button for mobile -->
-<div class="hamburger" id="hamburger">
-  <span>&#9776;</span>
-</div>
-
 
   <div style="  width: 100vw; position: relative; left: calc(-50vw + 50%);" id="patcherCanvas">
     <script type="text/javascript" src="js/app.js"></script> 
@@ -87,87 +81,70 @@ title: Home
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-    const sidenav = document.querySelector('.sidenav');
-    const hamburger = document.getElementById('hamburger');
-    let timeout;
-    let sidebarVisible = false;
-
-    // Function to toggle sidebar visibility
-    function toggleSidebar() {
-        if (sidebarVisible) {
-            sidenav.classList.remove('active');
-            sidenav.classList.add('hidden');
-            sidebarVisible = false;
-        } else {
-            sidenav.classList.add('active');
-            sidenav.classList.remove('hidden');
-            sidebarVisible = true;
-        }
-    }
-
-    // Show sidebar on hamburger click (mobile view)
-    hamburger.addEventListener('click', function() {
-        toggleSidebar();
-    });
-
-    // Hide the sidebar automatically after 3 seconds of inactivity on desktop
-    function resetTimeout() {
-        clearTimeout(timeout);
-        timeout = setTimeout(hideSidebar, 3000); // Hide after 3 seconds
-    }
-
-    // Functions to show/hide sidebar
-    function showSidebar() {
-        if (!sidebarVisible) {
-            sidenav.classList.add('active');
-            sidenav.classList.remove('hidden');
-            sidebarVisible = true;
-        }
-        resetTimeout();
-    }
-
-    function hideSidebar() {
-        if (sidebarVisible) {
-            sidenav.classList.remove('active');
-            sidenav.classList.add('hidden');
-            sidebarVisible = false;
-        }
-    }
-
-    // Prevent hiding when hovering over the sidebar (on desktop)
-    sidenav.addEventListener('mouseenter', function() {
-        clearTimeout(timeout); // Cancel the timeout when hovered
-    });
-
-    sidenav.addEventListener('mouseleave', function() {
-        resetTimeout(); // Restart the timeout when the mouse leaves
-    });
-
-    // Listen for scroll events to show/hide sidebar on desktop
-    window.addEventListener('scroll', function() {
-        if (window.innerWidth > 768) {
-            checkScroll(); // Only check scroll for desktop
-        }
-    });
-
-    // Check scroll position to trigger sidebar display on desktop
-    function checkScroll() {
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        const documentHeight = document.documentElement.scrollHeight;
-        const windowHeight = window.innerHeight;
-        const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
-
-        if (scrollPercentage > 20) {
-            showSidebar();
-        } else {
-            hideSidebar();
-        }
-    }
+        const sidenav = document.querySelector('.sidenav');
+        let timeout;
+        let sidebarVisible = false;
     
-    // Initially check scroll position on desktop
-    checkScroll();
-});
+        function showSidebar() {
+            if (!sidebarVisible) {
+                sidenav.classList.add('active');
+                sidenav.classList.remove('hidden');
+                sidebarVisible = true;
+            }
+            resetTimeout();
+        }
+    
+        function hideSidebar() {
+            if (sidebarVisible) {
+                sidenav.classList.remove('active');
+                sidenav.classList.add('hidden');
+                sidebarVisible = false;
+            }
+        }
+    
+        function resetTimeout() {
+            clearTimeout(timeout);
+            timeout = setTimeout(hideSidebar, 3000); // Hide after 3 seconds of inactivity
+        }
+    
+        function checkScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const documentHeight = document.documentElement.scrollHeight;
+            const windowHeight = window.innerHeight;
+            const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+    
+            if (scrollPercentage > 20) {
+                showSidebar();                
+            }
+            else 
+            {
+              hideSidebar();
+            }
+        }
 
+        // Prevent hiding when hovering over the sidebar
+        sidenav.addEventListener('mouseenter', function() {
+        clearTimeout(timeout); // Cancel the timeout when hovered
+        });
+
+        sidenav.addEventListener('mouseleave', function() {
+        resetTimeout(); // Restart the timeout when the mouse leaves
+        });
+    
+        // Listen for scroll events
+        window.addEventListener('scroll', checkScroll);
+    
+        // Initially check the scroll position in case the user is already past 20%
+        checkScroll();
+    
+        // Event listeners for user activity
+        //document.addEventListener('mousemove', showSidebar);
+       // document.addEventListener('keypress', showSidebar);
+        document.addEventListener('scroll',checkScroll );
+    
+        // Initially show the sidebar if needed
+        //showSidebar();
+    });
     </script>
 
 

@@ -89,38 +89,3 @@ h2, em {
     left: -160px; /* Sidebar is hidden */
 }
 
-/* Hamburger button */
-.hamburger {
-    display: none; /* Hidden on larger screens */
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    font-size: 30px;
-    cursor: pointer;
-    z-index: 20;
-}
-
-/* Mobile view */
-@media only screen and (max-width: 768px) {
-    .sidenav {
-        width: 80%; /* Take up 80% of the screen */
-        left: -80%; /* Hide the sidebar initially on mobile */
-    }
-
-    .sidenav.active {
-        left: 0; /* Slide in from the left on mobile */
-    }
-
-    .hamburger {
-        display: block; /* Show the hamburger button on small screens */
-    }
-}
-
-/* Optional touch-friendliness: Increase clickable areas */
-.sidenav a {
-    padding: 15px;
-    font-size: 18px;
-    text-decoration: none;
-    display: block;
-    color: white;
-}
