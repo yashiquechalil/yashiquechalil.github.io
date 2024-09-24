@@ -121,6 +121,15 @@ title: Home
               hideSidebar();
             }
         }
+
+        // Prevent hiding when hovering over the sidebar
+        sidenav.addEventListener('mouseenter', function() {
+        clearTimeout(timeout); // Cancel the timeout when hovered
+        });
+
+        sidenav.addEventListener('mouseleave', function() {
+        resetTimeout(); // Restart the timeout when the mouse leaves
+        });
     
         // Listen for scroll events
         window.addEventListener('scroll', checkScroll);

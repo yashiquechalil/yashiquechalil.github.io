@@ -77,7 +77,8 @@ h2, em {
 }
 
 .sidenav a:hover {
-    color: #f1f1f1;
+    color: #000000;
+    left: 0; /* Keep sidebar visible on hover */
 }
 
 .sidenav.active {
