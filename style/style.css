@@ -89,3 +89,11 @@ h2, em {
     left: -160px; /* Sidebar is hidden */
 }
 
+
+figcaption {
+    background-color: #222;
+    color: #fff;
+    font: italic smaller sans-serif;
+    padding: 3px;
+    text-align: center;
+  }
