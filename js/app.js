@@ -256,7 +256,7 @@ function draw() {
 
     for (let i = 0; i < numCircles; i++) {
         const freqIndex = Math.floor(map(i, 0, numCircles, spectrum.length - 1, 0));  // Higher frequencies in the center
-        const amplitude = map(spectrum[freqIndex], 0, 255, 10, 50);  // Adjust amplitude scaling
+        const amplitude = map(spectrum[freqIndex], 0, 255, 10, 100);  // Adjust amplitude scaling
         
         const radius = map(i, 0, numCircles, maxRadius, 20);
         stroke(50, 50, 255 - (i * 20));  // Color gradient
@@ -264,7 +264,7 @@ function draw() {
         
         beginShape();
         for (let j = 0; j < TWO_PI; j += 0.01) {
-            const r = radius + amplitude * sin(j * 10);  // Wave effect on the circle
+            const r = radius + amplitude * sin(j * 8);  // Wave effect on the circle
             const x = centerX + r * cos(j);
             const y = centerY + r * sin(j);
             vertex(x, y);
