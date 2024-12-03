@@ -187,13 +187,11 @@ let isPlaying = false;
 
 async function rnboSetup(context) { 
     const patchExportURL = "export/patch.export.json";
-
     const outputNode = context.createGain();
     outputNode.connect(context.destination);
 
     const response = await fetch(patchExportURL);
     const doomPatcher = await response.json();
-
     const doomDevice = await RNBO.createDevice({ context, patcher: doomPatcher });
 
     startParam = doomDevice.parametersById.get('start');
@@ -245,22 +243,32 @@ function draw() {
     stroke(0);
     strokeWeight(2);
     
-    const waveform = fft.waveform();
-    const centerX = width / 2;
-    const centerY = height / 2;
-    const radius = min(centerX, centerY) - 20;  // Adjust radius to fit within canvas
-    
+    const spectrum = fft.analyze();
+    const numCircles = 10;  // Number of concentric circles
+    const maxRadius = min(width, height) / 2 - 20;  // Adjust maximum radius to fit within the canvas
+
     // Map mouse input to parameters
     if (buzzParam) buzzParam.normalizedValue = constrain(map(mouseY, height, 0, 0, 1), 0, 1);
     if (mixParam) mixParam.normalizedValue = constrain(map(mouseX, 0, width, 0.01, 1), 0.01, 1);
     
-    beginShape();
-    for (let i = 0; i < waveform.length; i++) {
-        const angle = map(i, 0, waveform.length, 0, TWO_PI);
-        const waveRadius = radius + map(waveform[i], -1, 1, -50, 50);
-        const x = centerX + waveRadius * cos(angle);
-        const y = centerY + waveRadius * sin(angle);
-        vertex(x, y);
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    for (let i = 0; i < numCircles; i++) {
+        const freqIndex = Math.floor(map(i, 0, numCircles, spectrum.length - 1, 0));  // Higher frequencies in the center
+        const amplitude = map(spectrum[freqIndex], 0, 255, 10, 50);  // Adjust amplitude scaling
+        
+        const radius = map(i, 0, numCircles, maxRadius, 20);
+        stroke(50, 50, 255 - (i * 20));  // Color gradient
+        noFill();
+        
+        beginShape();
+        for (let j = 0; j < TWO_PI; j += 0.01) {
+            const r = radius + amplitude * sin(j * 10);  // Wave effect on the circle
+            const x = centerX + r * cos(j);
+            const y = centerY + r * sin(j);
+            vertex(x, y);
+        }
+        endShape(CLOSE);
     }
-    endShape(CLOSE);
 }
