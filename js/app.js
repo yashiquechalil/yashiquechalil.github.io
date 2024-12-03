@@ -254,7 +254,7 @@ function draw() {
         // Map circle index to frequency range
         let freq = map(i, 0, numCircles - 1, minFreq, maxFreq);
         let amplitude = fft.getEnergy(freq - 50, freq + 50); // Energy in a small frequency band
-        amplitude = map(amplitude, 0, 255, 0, 50); // Scale amplitude for visualization
+        amplitude = map(amplitude, 0, 255, 0, 100); // Scale amplitude for visualization
         
         // Set circle radius
         let radius = map(i, 0, numCircles - 1, maxRadius, 50);
@@ -266,7 +266,7 @@ function draw() {
         beginShape();
         for (let angle = 0; angle < TWO_PI; angle += 0.01) {
             // Apply random noise to distortion
-            let noiseVal = noise(i * 0.1, angle * 2 + frameCount * 0.01);
+            let noiseVal = noise(i * 0.1, angle * 2 + frameCount * 0.01) * 2;
             let distortion = amplitude * noiseVal * noiseFactor;
             
             let r = radius + distortion;
