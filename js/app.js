@@ -243,30 +243,35 @@ function draw() {
     stroke(0);
     strokeWeight(2);
     
-    const spectrum = fft.analyze();
-    const numCircles = 10;  // Number of concentric circles
-    const maxRadius = min(width, height) / 2 - 20;  // Adjust maximum radius to fit within the canvas
-
-    // Map mouse input to parameters
-    if (buzzParam) buzzParam.normalizedValue = constrain(map(mouseY, height, 0, 0, 1), 0, 1);
-    if (mixParam) mixParam.normalizedValue = constrain(map(mouseX, 0, width, 0.01, 1), 0.01, 1);
-    
     const centerX = width / 2;
     const centerY = height / 2;
+    const numCircles = 20;  // Number of concentric circles
+    const minFreq = 500;   // Minimum frequency (Hz)
+    const maxFreq = 15000; // Maximum frequency (Hz)
+    const maxRadius = min(width, height) / 2 - 20;
 
     for (let i = 0; i < numCircles; i++) {
-        const freqIndex = Math.floor(map(i, 0, numCircles, spectrum.length - 1, 0));  // Higher frequencies in the center
-        const amplitude = map(spectrum[freqIndex], 0, 255, 10, 100);  // Adjust amplitude scaling
+        // Map circle index to frequency range
+        let freq = map(i, 0, numCircles - 1, minFreq, maxFreq);
+        let amplitude = fft.getEnergy(freq - 50, freq + 50); // Energy in a small frequency band
+        amplitude = map(amplitude, 0, 255, 0, 50); // Scale amplitude for visualization
         
-        const radius = map(i, 0, numCircles, maxRadius, 20);
-        stroke(50, 50, 255 - (i * 20));  // Color gradient
+        // Set circle radius
+        let radius = map(i, 0, numCircles - 1, maxRadius, 50);
+        let noiseFactor = random(0.5, 1.5);  // Introduce random scaling for distortion
+
+        stroke(50, 50, 255 - (i * 20));  // Gradient coloring
         noFill();
-        
+
         beginShape();
-        for (let j = 0; j < TWO_PI; j += 0.01) {
-            const r = radius + amplitude * sin(j * 8);  // Wave effect on the circle
-            const x = centerX + r * cos(j);
-            const y = centerY + r * sin(j);
+        for (let angle = 0; angle < TWO_PI; angle += 0.01) {
+            // Apply random noise to distortion
+            let noiseVal = noise(i * 0.1, angle * 2 + frameCount * 0.01);
+            let distortion = amplitude * noiseVal * noiseFactor;
+            
+            let r = radius + distortion;
+            let x = centerX + r * cos(angle);
+            let y = centerY + r * sin(angle);
             vertex(x, y);
         }
         endShape(CLOSE);
