@@ -137,7 +137,7 @@ class SemiCircularWave {
         for (let angle = -HALF_PI; angle <= HALF_PI; angle += 0.1) {
             let audioModulation = this.waveform ? this.waveform[Math.floor(map(angle, -HALF_PI, HALF_PI, 0, this.waveform.length))] * waveHeight : 0;
             let x = cos(angle) * (this.radius + (audioModulation * 2));
-            let y = sin(angle) * (this.radius + (audioModulation * 2));
+            let y = sin(angle) * (this.radius + (audioModulation * 10));
             curveVertex(x, y);
         }
         endShape();
