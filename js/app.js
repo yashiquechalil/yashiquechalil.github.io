@@ -37,6 +37,7 @@ function setup() {
     canvas = createCanvas(w, h);
     canvas.parent('patcherCanvas');
     noFill();
+    strokeWeight(50); // Lines are now 10px in width
     angleMode(RADIANS);
 
     startButton = createButton('Start/Stop'); 
@@ -73,7 +74,7 @@ function resumeAudio() {
 }
 
 function draw() {
-    background(211, 211, 211); // Light background
+    background(31); // Light background
     translate(-height / 2, height / 2); // Align animation to the left
 
     // Map mouse inputs to audio parameters
