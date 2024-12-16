@@ -72,12 +72,12 @@ h2, em {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: #000000;
     display: block;
 }
 
 .sidenav a:hover {
-    color: #000000;
+    color: #131313;
     left: 0; /* Keep sidebar visible on hover */
 }
 
