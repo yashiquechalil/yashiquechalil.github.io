@@ -9,6 +9,7 @@ let lineSpacing = 20; // Space between the lines
 let canvas, w, h, sketchStarted = false, context, fft, startParam, buzzParam, mixParam;
 let isPlaying = false;
 let waveform = [];
+let startButton, playIcon, pauseIcon;
 
 async function rnboSetup(context) { 
     const patchExportURL = "export/patch.export.json";
@@ -40,14 +41,30 @@ function setup() {
     strokeWeight(50); // Lines are now 10px in width
     angleMode(RADIANS);
 
-    startButton = createButton('Start/Stop'); 
-    startButton.style('background-color', 'red');
+    // Create circular start/stop button
+    startButton = createButton('');
+    startButton.style('background-color', '#ffffff');
     startButton.style('border', 'none');
-    startButton.style('color', 'white');
-    startButton.style('padding', '15px 32px');
-    startButton.style('font-size', '16px');
-    startButton.position(w / 2, h / 2);
+    startButton.style('border-radius', '50%');
+    startButton.style('width', '80px');
+    startButton.style('height', '80px');
+    startButton.style('display', 'flex');
+    startButton.style('justify-content', 'center');
+    startButton.style('align-items', 'center');
+    startButton.style('box-shadow', '0px 4px 6px rgba(0, 0, 0, 0.1)');
+    startButton.position(w / 2 - 40, h / 2 - 40);
     startButton.mousePressed(resumeAudio);
+
+    // Create play and pause icons
+    playIcon = createSpan('▶');
+    playIcon.style('font-size', '36px');
+    playIcon.style('color', '#000');
+    pauseIcon = createSpan('❚❚');
+    pauseIcon.style('font-size', '36px');
+    pauseIcon.style('color', '#000');
+    pauseIcon.hide();
+    startButton.child(playIcon);
+    startButton.child(pauseIcon);
 
     context = getAudioContext();
     fft = new p5.FFT(0.8, 2048);
@@ -67,14 +84,18 @@ function resumeAudio() {
     if (isPlaying == false) {
         startParam.enumValue = 'start';
         isPlaying = true;
+        playIcon.hide();
+        pauseIcon.show();
     } else {
         startParam.enumValue = 'stop';
         isPlaying = false;
+        pauseIcon.hide();
+        playIcon.show();
     }
 }
 
 function draw() {
-    background(31); // Light background
+    background(211, 211, 211); // Light background
     translate(-height / 2, height / 2); // Align animation to the left
 
     // Map mouse inputs to audio parameters
