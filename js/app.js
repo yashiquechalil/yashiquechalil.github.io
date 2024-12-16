@@ -8,6 +8,7 @@ let lineSpacing = 20; // Space between the lines
 
 let canvas, w, h, sketchStarted = false, context, fft, startParam, buzzParam, mixParam;
 let isPlaying = false;
+let waveform = [];
 
 async function rnboSetup(context) { 
     const patchExportURL = "export/patch.export.json";
@@ -87,9 +88,12 @@ function draw() {
         mixParam.normalizedValue = xValue;
     }
 
+    // Update FFT waveform
+    waveform = fft.waveform();
+
     // Draw semi-circular waves
     for (let line of lines) {
-        line.update();
+        line.update(waveform);
         line.display();
     }
 }
@@ -100,7 +104,8 @@ class SemiCircularWave {
         this.radius = 100 + index * (50 + lineSpacing);
     }
 
-    update() {
+    update(waveform) {
+        this.waveform = waveform;
         this.time = frameCount * speed;
     }
 
@@ -108,8 +113,9 @@ class SemiCircularWave {
         stroke(lerpColor(color(0, 128, 128), color(100, 200, 255), this.index / numLines));
         beginShape();
         for (let angle = -HALF_PI; angle <= HALF_PI; angle += 0.1) {
-            let x = cos(angle) * (this.radius + sin(angle * waveLength + this.time) * waveHeight);
-            let y = sin(angle) * (this.radius + sin(angle * waveLength + this.time) * waveHeight);
+            let audioModulation = this.waveform ? this.waveform[Math.floor(map(angle, -HALF_PI, HALF_PI, 0, this.waveform.length))] * waveHeight : 0;
+            let x = cos(angle) * (this.radius + audioModulation);
+            let y = sin(angle) * (this.radius + audioModulation);
             curveVertex(x, y);
         }
         endShape();
