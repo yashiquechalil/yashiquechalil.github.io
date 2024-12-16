@@ -52,7 +52,9 @@ function setup() {
     startButton.style('justify-content', 'center');
     startButton.style('align-items', 'center');
     startButton.style('box-shadow', '0px 4px 6px rgba(0, 0, 0, 0.1)');
-    startButton.position(w / 2 - 40, h / 2 - 40);
+    startButton.style('Position','fixed');
+    startButton.style('left','90%');
+    startButton.style('top','80%');
     startButton.mousePressed(resumeAudio);
 
     // Create play and pause icons
