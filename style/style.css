@@ -120,9 +120,11 @@ figcaption {
 
 @media (max-width: 768px) {
     .start-button {
-        left: 80%; /* Mobile-specific position */
-        top: 70%;  /* Mobile-specific position */
+        left: 85%; /* Mobile-specific position */
+        top: 90%;  /* Mobile-specific position */
         transform: translate(-50%, -50%); /* Centering adjustment for mobile */
+        width: 70px; /* Button width */
+        height: 70px; /* Button height */
     }
 }
 /* Shared icon styling */
