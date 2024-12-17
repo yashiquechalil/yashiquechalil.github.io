@@ -45,30 +45,19 @@ function setup() {
 
     // Create circular start/stop button
     startButton = createButton('');
-    startButton.style('background-color', '#ffffff');
-    startButton.style('border', 'none');
-    startButton.style('border-radius', '50%');
-    startButton.style('width', '80px');
-    startButton.style('height', '80px');
-    startButton.style('display', 'flex');
-    startButton.style('justify-content', 'center');
-    startButton.style('align-items', 'center');
-    startButton.style('box-shadow', '0px 4px 6px rgba(0, 0, 0, 0.1)');
-    startButton.style('position','fixed');
-    startButton.style('left','90%');
-    startButton.style('top','80%');
+    startButton.addClass('start-button');
     startButton.mousePressed(resumeAudio);
-
+    
     // Create play and pause icons
     playIcon = createSpan('▶');
-    playIcon.style('font-size', '36px');
-    playIcon.style('color', '#000');
     pauseIcon = createSpan('❚❚');
-    pauseIcon.style('font-size', '36px');
-    pauseIcon.style('color', '#000');
     pauseIcon.hide();
     startButton.child(playIcon);
     startButton.child(pauseIcon);
+    playIcon.addClass('icon play-icon'); // Applies styles for the play icon
+    pauseIcon.addClass('icon pause-icon'); // Applies styles for the pause icon
+
+
 
     context = getAudioContext();
     fft = new p5.FFT(0.8, 2048);
