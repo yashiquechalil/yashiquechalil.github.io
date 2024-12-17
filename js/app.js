@@ -25,6 +25,8 @@ async function rnboSetup(context) {
     startParam = doomDevice.parametersById.get('start');
     mixParam = doomDevice.parametersById.get('doomFuzz/Mix');
     buzzParam = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
+    doomFreq = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Doom/FreqShift');
+    doomFreq = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Doom/FreqShift');
 
     fft.setInput(outputNode);
 
@@ -71,6 +73,7 @@ function setup() {
     context = getAudioContext();
     fft = new p5.FFT(0.8, 2048);
     rnboSetup(context);
+    readOrient();
 
     for (let i = 0; i < numLines; i++) {
         lines.push(new SemiCircularWave(i));
@@ -148,4 +151,37 @@ class SemiCircularWave {
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
+}
+
+function readOrient() {
+if (window.DeviceOrientationEvent) {
+    window.addEventListener(
+        "deviceorientation",
+        (event) => {
+            const rotateDegrees = event.alpha; // alpha: rotation around z-axis
+            const leftToRight = event.gamma; // gamma: left to right
+            const frontToBack = event.beta; // beta: front back motion
+
+            handleOrientationEvent(frontToBack, leftToRight, rotateDegrees);
+        },
+        true,
+    );
+}
+else
+{
+    throw new Error("no sensors here .-.");
+}
+
+const handleOrientationEvent = (frontToBack, leftToRight, rotateDegrees) => {
+    // if(buzzParam) {
+    //     doomFreq.normalizedValue = frontToBack;
+
+    // }
+
+    if (mixParam){
+        doomFreq.normalizedValue = leftToRight;
+    }
+};
+
+
 }
