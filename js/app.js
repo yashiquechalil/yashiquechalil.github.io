@@ -25,8 +25,8 @@ async function rnboSetup(context) {
     startParam = doomDevice.parametersById.get('start');
     mixParam = doomDevice.parametersById.get('doomFuzz/Mix');
     buzzParam = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Fuzz/Buzz');
-    doomFreq = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Doom/FreqShift');
-    doomFreq = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Doom/FreqShift');
+    doomFreq = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Doom/DoomFreqShift');
+    //doomFreq = doomDevice.parametersById.get('doomFuzz/DoomFuzzDSP/Doom/FreqShift');
 
     fft.setInput(outputNode);
 
