@@ -118,7 +118,7 @@ figcaption {
     cursor: pointer; /* Pointer cursor on hover */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
     .start-button {
         left: 85%; /* Mobile-specific position */
         top: 90%;  /* Mobile-specific position */
@@ -133,7 +133,7 @@ figcaption {
     color: #000; /* Black color */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
     .icon {
         font-size: 24px;
     }
