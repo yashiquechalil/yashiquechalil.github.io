@@ -58,7 +58,7 @@ h2, em {
 }
 
 .menu-button {
-    position: grid;
+    position:fixed;
     top: 88%;
     left: 5%;
     width: 50px;
