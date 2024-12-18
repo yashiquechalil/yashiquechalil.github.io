@@ -58,11 +58,12 @@ h2, em {
 }
 
 .menu-button {
-    position: fixed;
+    position: grid;
     top: 88%;
     left: 5%;
     width: 50px;
     height: 50px;
+    visibility: hidden;
     background-color: #333; /* Button background color */
     color: white; /* Button icon color */
     font-size: 30px; /* Size of the menu icon */
@@ -86,6 +87,7 @@ h2, em {
 @media (max-width: 1000px) {
     .menu-button {
         display: grid; /* Display menu icon on small screens */
+        visibility: visible;
     }
 }
 
