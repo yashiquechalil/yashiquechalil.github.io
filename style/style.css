@@ -57,15 +57,28 @@ h2, em {
     flex-grow: 1;
 }
 
-/* Menu button styling */
-.menu-icon {
-    font-size: 24px;
-    cursor: pointer;
+.menu-button {
     position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 1000; /* Ensure it's above other elements */
-    display: none; /* Initially hidden */
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #333; /* Button background color */
+    color: white; /* Button icon color */
+    font-size: 24px; /* Size of the menu icon */
+    border-radius: 50%; /* Make the button circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    z-index: 1000; /* Ensure it stays on top */
+    cursor: pointer; /* Show a pointer cursor on hover */
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.menu-button:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    background-color: #555; /* Change background color on hover */
 }
 
 /* Mobile view: Show the menu icon */
