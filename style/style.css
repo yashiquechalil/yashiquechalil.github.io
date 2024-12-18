@@ -73,6 +73,7 @@ h2, em {
     .menu-icon {
         display: block; /* Display menu icon on small screens */
     }
+}
 
 /* Sidebar styles */
 .sidenav {
