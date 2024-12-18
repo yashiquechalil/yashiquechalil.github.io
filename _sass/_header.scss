@@ -5,18 +5,11 @@
   background-color: #d3d3d3;
   z-index: 100;
 }
-@media (max-width: $container-width) {
-  .site-header {
-    min-height: 56px;
-    width: 95vw;
-    position: fixed;
-    background-color: #d3d3d3;
-    z-index: 100;
-  }
-}
+
 .site-header a {
   text-decoration: none;
 }
+
 .site-title {
   font-size: 20px;
   font-weight: 400;
@@ -26,67 +19,38 @@
   padding-left: 10px;
   float: left;
 }
+
 .menu-list {
   line-height: $header-thickness;
   float: right;
 }
+
 .menu-link {
   padding: 5px 10px;
 }
 
-/*
-  Responsiveness with a dropdown menu
-*/
-
-@media (min-width: $container-width) {
-  .dropbtn {
-    display: none;
-  }
-  .dropdown-content {
-    display: none;
-  }
-}
+/* Ensure consistency across all viewports */
 @media (max-width: $container-width) {
+  .site-header {
+    min-height: 56px;
+    width: 95vw; /* Slight adjustment for mobile width */
+    position: fixed;
+    background-color: #d3d3d3;
+    z-index: 100;
+  }
+
+  /* Preserve desktop menu style for mobile */
   .menu-list {
-    display: none;
+    display: flex; /* Ensure it shows the menu list on mobile */
+    flex-direction: row; /* Horizontal layout */
+    justify-content: flex-end;
   }
-  .site-title {
-    padding-right: 0.25rem;
+
+  .menu-link {
+    padding: 5px 10px;
   }
-  .dropbtn {
-    background-color: #d3d3d3;
-    color: black;
-    padding: 16px;
-    margin-top: 4px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-  }
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #d3d3d3;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  .dropdown-content a:hover {
-    background-color: #d3d3d3;
-  }
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  .dropdown:hover .dropbtn {
-    background-color: #d3d3d3;
+
+  .dropdown, .dropbtn, .dropdown-content {
+    display: none; /* Remove dropdown-related elements */
   }
 }
