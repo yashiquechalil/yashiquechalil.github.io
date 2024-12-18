@@ -174,3 +174,19 @@ const handleOrientationEvent = (frontToBack, leftToRight, rotateDegrees) => {
 
 
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menuButton = document.getElementById('menuButton');
+    const sidenav = document.getElementById('mySidenav');
+
+    // Toggle sidebar visibility on menu button click
+    menuButton.addEventListener('click', function() {
+        if (sidenav.classList.contains('active')) {
+            sidenav.classList.remove('active');
+            sidenav.classList.add('hidden');
+        } else {
+            sidenav.classList.add('active');
+            sidenav.classList.remove('hidden');
+        }
+    });
+});
