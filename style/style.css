@@ -58,7 +58,7 @@ h2, em {
 }
 
 .menu-button {
-    position: relative;
+    position: fixed;
     top: 88%;
     left: 5%;
     width: 50px;
@@ -73,6 +73,7 @@ h2, em {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
     z-index: 1000; /* Ensure it stays on top */
     cursor: pointer; /* Show a pointer cursor on hover */
+    transform: translate(-50%, -50%); /* Centering adjustment */
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
@@ -84,7 +85,7 @@ h2, em {
 /* Mobile view: Show the menu icon */
 @media (max-width: 1000px) {
     .menu-button {
-        display: block; /* Display menu icon on small screens */
+        display: grid; /* Display menu icon on small screens */
     }
 }
 
