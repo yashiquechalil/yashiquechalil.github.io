@@ -83,7 +83,7 @@ h2, em {
 
 /* Mobile view: Show the menu icon */
 @media (max-width: 1000px) {
-    .menu-icon {
+    .menu-button {
         display: block; /* Display menu icon on small screens */
     }
 }
