@@ -84,11 +84,16 @@ title: Home
 
 
   <script>
-        document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
         const menuButton = document.getElementById('menuButton');
         const sidenav = document.getElementById('mySidenav');
         let timeout;
         let sidebarVisible = false;
+    
+        // Function to detect if the view is mobile
+        function isMobileView() {
+            return window.innerWidth <= 768; // Define mobile view as width <= 768px
+        }
     
         // Function to show the sidebar
         function showSidebar() {
@@ -97,7 +102,6 @@ title: Home
                 sidenav.classList.remove('hidden');
                 sidebarVisible = true;
             }
-            resetTimeout();
         }
     
         // Function to hide the sidebar
@@ -107,12 +111,6 @@ title: Home
                 sidenav.classList.add('hidden');
                 sidebarVisible = false;
             }
-        }
-    
-        // Reset timeout for auto-hide
-        function resetTimeout() {
-            clearTimeout(timeout);
-            timeout = setTimeout(hideSidebar, 3000); // Hide after 3 seconds of inactivity
         }
     
         // Show/hide sidebar based on menu button click
@@ -130,11 +128,17 @@ title: Home
         });
     
         sidenav.addEventListener('mouseleave', function() {
-            resetTimeout(); // Restart the timeout when the mouse leaves
+            if (!isMobileView()) {
+                timeout = setTimeout(hideSidebar, 3000); // Restart timeout when mouse leaves, only for non-mobile
+            }
         });
     
-        // Show sidebar on scroll past 20% of the page
+        // Function to handle scroll-based visibility for non-mobile views
         function checkScroll() {
+            if (isMobileView()) {
+                return; // Skip scroll-based activation for mobile
+            }
+    
             const scrollTop = window.scrollY || document.documentElement.scrollTop;
             const documentHeight = document.documentElement.scrollHeight;
             const windowHeight = window.innerHeight;
@@ -147,11 +151,20 @@ title: Home
             }
         }
     
-        // Listen for scroll events
+        // Listen for scroll events (only for non-mobile)
         window.addEventListener('scroll', checkScroll);
     
-        // Initially check scroll position
-        checkScroll();
+        // Listen for window resize to recheck mobile view
+        window.addEventListener('resize', function() {
+            if (isMobileView() && sidebarVisible) {
+                hideSidebar(); // Ensure sidebar is hidden when switching to mobile view
+            }
+        });
+    
+        // Initially check scroll position (only for non-mobile)
+        if (!isMobileView()) {
+            checkScroll();
+        }
     });
     </script>
     
