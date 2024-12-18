@@ -78,10 +78,7 @@ h2, em {
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.menu-button:hover {
-    transform: scale(1.1); /* Slightly enlarge on hover */
-    background-color: #555; /* Change background color on hover */
-}
+
 
 /* Mobile view: Show the menu icon */
 @media (max-width: 1000px) {
@@ -136,7 +133,7 @@ figcaption {
 
   /* Button styling */
 .start-button {
-    background-color: #ffffff; /* White background */
+    background-color: #333; /* White background */
     border: none; /* No border */
     border-radius: 50%; /* Circular button */
     width: 80px; /* Button width */
@@ -164,12 +161,12 @@ figcaption {
 /* Shared icon styling */
 .icon {
     font-size: 36px; /* Icon size */
-    color: #000; /* Black color */
+    color: white; /* Black color */
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1000px) {
     .icon {
-        font-size: 24px;
+        font-size: 32px;
     }
 }
 
