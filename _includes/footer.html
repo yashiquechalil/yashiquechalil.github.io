@@ -1,6 +1,8 @@
-<footer class="footer">
-  {% for item in site.data.settings.social %}
-    <a href="{{ item.link }}" class="menu-link" target="_blank"><i class="fa fa-{{ item.icon }}" aria-hidden="true"></i></a>
-  {% endfor %}
-  <div class="footer-description"><a href="{{ site.github.url }}/">{{ site.title }} | {{ site.description }}</a></div>
+<footer class="footer snap-section" style="background: transparent; color: #111;">
+  <div style="text-align: center; max-width: 600px;">
+    {% for item in site.data.settings.social %}
+      <a href="{{ item.link }}" class="menu-link" target="_blank" style="margin: 0 15px; font-size: 24px;"><i class="fa fa-{{ item.icon }}" aria-hidden="true"></i></a>
+    {% endfor %}
+    <div class="footer-description" style="margin-top: 30px; font-weight: bold; letter-spacing: 1px;"><a href="{{ site.github.url }}/" style="text-decoration: none; color: #333;">{{ site.title }} | {{ site.description }}</a></div>
+  </div>
 </footer>

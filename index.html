@@ -1,6 +1,267 @@
----
-layout: home
-title: Home
----
+<!doctype html>
+<html>
+  <head>
+  <title>
+    
+      Yashique Chalil | Sound Designer & Audio developer
+    
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="https://yashiquechalil.com/assets/css/main.css">
+  <link rel="stylesheet" href="https://yashiquechalil.com/assets/css/syntax.css">
+  
+  <!-- Use Atom -->
+  <link type="application/atom+xml" rel="alternate" href="https://yashiquechalil.com/feed.xml" title="Yashique Chalil" />
+  <!-- RSS-v2.0
+  <link href="https://yashiquechalil.com/rss-feed.xml" type="application/rss+xml" rel="alternate" title="Yashique Chalil | Sound Designer & Audio developer"/>
+  //-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Source+Code+Pro">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+
+  <script src="https://cdn.cycling74.com/rnbo/1.3.3/rnbo.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js"></script>
 
 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <meta name="rnbo-version" content="1.0.0-alpha.5">
+  <link rel="stylesheet" href="style/style.css">
+  <style>
+    html {
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+    
+    .snap-section {
+      scroll-snap-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .snap-section-start {
+      scroll-snap-align: start;
+    }
+
+    .static-nav {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .static-nav h2 {
+      margin-bottom: 2rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: #333;
+      text-transform: uppercase;
+    }
+    
+    .static-nav a {
+      font-size: 24px;
+      padding: 10px;
+      margin: 0;
+      color: #111;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+    }
+    
+    .static-nav a:hover {
+      letter-spacing: 3px;
+      transform: scale(1.08); /* slightly enlarge the text */
+    }
+    
+    /* Make subsequent blocks lie on top of the fixed canvas */
+    .content-wrapper > div {
+      position: relative;
+      z-index: 10;
+      background: transparent;
+      padding-bottom: 2rem;
+    }
+    .content-wrapper > div:first-of-type {
+      background: transparent; /* allow patcher to show behind hero */
+    }
+    body {
+      background-color: #d3d3d3;
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  <!-- Use Jekyll SEO plugin -->
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Home | Yashique Chalil</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Home" />
+<meta name="author" content="Yashique" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Sound Designer &amp; Audio developer" />
+<meta property="og:description" content="Sound Designer &amp; Audio developer" />
+<link rel="canonical" href="https://yashiquechalil.com/" />
+<meta property="og:url" content="https://yashiquechalil.com/" />
+<meta property="og:site_name" content="Yashique Chalil" />
+<meta property="og:type" content="website" />
+<link rel="next" href="https://yashiquechalil.com/page2" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Home" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Yashique"},"description":"Sound Designer &amp; Audio developer","headline":"Home","name":"Yashique Chalil","url":"https://yashiquechalil.com/"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+  <body>
+    <div class="container">
+      <header class="site-header">
+  <h3 class="site-title">
+    <a href="/">Yashique Chalil</a>
+  </h3>
+  <nav class="menu-list">
+    
+    
+      <a href="https://www.instagram.com/sonorative/" class="menu-link" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+    
+      <a href="https://www.linkedin.com/in/yashique/" class="menu-link" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+    
+      <a href="mailto:yashiquechalil@gmail.com" class="menu-link" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+    
+  </nav>
+  <div class="dropdown">
+    <button class="dropbtn"><i class="fa fa-bars" aria-hidden="true"></i></button>
+    <div class="dropdown-content">
+      
+      
+        <a href="https://www.instagram.com/sonorative/" class="menu-link" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+      
+        <a href="https://www.linkedin.com/in/yashique/" class="menu-link" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+      
+        <a href="mailto:yashiquechalil@gmail.com" class="menu-link" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+      
+    </div>
+  </div>
+</header>
+
+      <div class="content-wrapper">
+        
+        <body>
+  <div>
+    <!-- (Optional) The guardrails.js script isn't required for RNBO to work, and you can skip including it -->
+    <!-- It simply offers some helpful error messages for common problems -->
+    <script type="text/javascript" src="js/guardrails.js"></script>
+
+    <!-- Import RNBO Engine Wrapper -->
+    <!-- Make sure to include the RNBO engine version to the version of your exported code, found in rnbopackage.json -->
+  </div>
+
+  <!-- Interactive Canvas Background -->
+  <div style="width: 100vw; height: 100vh; position: fixed; z-index: -100; left: 0; top: 0;" id="patcherCanvas">
+    <script type="text/javascript" src="js/app.js"></script> 
+  </div>
+
+  <!-- Hero Section (Takes up the first viewport, play button overlaid here) -->
+  <div id="hero" class="snap-section" style="height: 100vh; width: 100%; position: relative;">
+  </div>
+
+  <!-- Centered Nav Menu -->
+  <div class="static-nav snap-section" id="main-nav">
+    <a href="https://yashiquechalil.com/about">About</a>
+    <a href="https://yashiquechalil.com/ai">Neural Synthesis</a>
+    <a href="https://yashiquechalil.com/hive">HIVE</a>
+    <a href="https://yashiquechalil.com/vst">Audio Dev</a>
+    <a href="https://yashiquechalil.com/ise"> Interactive Sound Env</a>
+    <a href="https://yashiquechalil.com/DSP">DSP</a>
+    <a href="https://yashiquechalil.com/podcast">Podcast</a>
+  </div>
+
+  <div style="background-color: transparent; position: relative; z-index: 10; padding-bottom: 50px;">
+    
+    <div class="snap-section" style="position:relative; max-width: 800px; margin: 0 auto; width: 100%; padding: 2rem;">
+      <h1 style="text-align: center;">Neural Synthesis</h1>
+      <iframe width="100%" style="aspect-ratio:16 / 9;" src="https://www.youtube.com/embed/zioyLQRZVgg?si=4p9NkIpPWHLpw8ig" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <p style="text-align:center; font-size: medium; font-weight: bold; margin-top: 20px;">This audio was synthesized using an AI model, that I trained specifically on sounds that reflect the sensory world (umwelt) of plants.</p>
+      <p style="text-align:center; font-size: medium; font-weight: bold;">Model reliability Engineer at Datamind Audio Ltd. Read <a href="https://yashiquechalil.com/ai"> more.</a> </p>
+    </div>
+
+    <div class="snap-section" style="position:relative; max-width: 800px; margin: 0 auto; width: 100%; padding: 2rem;">
+      <h1 style="text-align: center;">HIVE</h1>
+      <video width="100%" controls poster="https://yashiquechalil.com/assets/img/hivev1img.jpg"> 
+        <source src="https://yashiquechalil.com/assets/vid/hivev1.mp4" type="video/mp4" >
+        Your browser does not support the video tag.
+      </video>
+      <p style="text-align:center; font-size: medium; font-weight: bold; margin-top: 20px;">An embedded framework for quick prototyping of Programmable Digital Music Instruments (DMIs)</p>
+      <p style="text-align:center; font-size: medium; font-weight: bold;">Read <a href="https://yashiquechalil.com/hive"> more.</a> </p>
+    </div>
+
+    <div class="snap-section" style="position:relative; max-width: 800px; margin: 0 auto; width: 100%; padding: 2rem;">
+      <h1 style="text-align: center;">Interactive Sound Environment</h1>
+      <video width="100%" controls poster="https://yashiquechalil.com/assets/img/hept2img.jpg"> 
+        <source src="https://yashiquechalil.com/assets/vid/hept2vid.mp4" type="video/mp4" >
+        Your browser does not support the video tag.
+      </video>
+      <p style="text-align:center; font-size: medium; font-weight: bold; margin-top: 20px;">An interactive sound environment exploring the world of heptapod sound drones. Read <a href="https://yashiquechalil.com/ise"> more.</a></p>
+    </div>
+
+    <div class="snap-section" style="position:relative; max-width: 800px; margin: 0 auto; width: 100%; padding: 2rem;">
+      <h1 style="text-align: center;">순수박물관 예주은</h1>
+      <h1 style="text-align: center;">The Pure Exhibition</h1>
+      <video width="100%" controls poster="https://yashiquechalil.com/assets/img/exhibitionimg.png">
+        <source src="https://yashiquechalil.com/assets/vid/순수박물관 예주은.m4v" type="video/mp4" >
+        Your browser does not support the video tag.
+      </video>
+      <p style="text-align:center; font-size: medium; font-weight: bold; margin-top: 20px;">Sound Design/Mixing</p>
+      <iframe width="100%" height="200" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1910442386&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+      <div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
+        <a href="https://soundcloud.com/yash-que-chalil" title="yashique" target="_blank" style="color: #cccccc; text-decoration: none;">yashique</a> · 
+        <a href="https://soundcloud.com/yash-que-chalil/vox-aeterna" title="Vox Aeterna" target="_blank" style="color: #cccccc; text-decoration: none;">Vox Aeterna</a>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    // Sidebar removed, replaced with static-nav
+  </script>
+    
+
+
+    
+</body>
+
+      </div>
+  <footer class="footer snap-section" style="background: transparent; color: #111; min-height: 100vh; position: relative; z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <div style="text-align: center; max-width: 600px;">
+      <a href="https://www.instagram.com/sonorative/" class="menu-link" target="_blank" style="margin: 0 15px; font-size: 24px;"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+      <a href="https://www.linkedin.com/in/yashique/" class="menu-link" target="_blank" style="margin: 0 15px; font-size: 24px;"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+      <a href="mailto:yashiquechalil@gmail.com" class="menu-link" target="_blank" style="margin: 0 15px; font-size: 24px;"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+      <div class="footer-description" style="margin-top: 30px; font-weight: bold; letter-spacing: 1px;">
+        <a href="https://yashiquechalil.com/" style="text-decoration: none; color: #333;">Yashique Chalil | Sound Designer & Audio developer</a>
+      </div>
+    </div>
+  </footer>
+
+    </div>
+    
+  </body>
+</html>
